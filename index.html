@@ -86,37 +86,43 @@
 <div class="wrap">
   <div class="header">
     <h1>Привет, Оксана!</h1>
-    <p>Заполни эту анкету, чтобы я сделал тебе красивый сайт. Пиши просто текстом, без заморочек. Где нужно — выбирай варианты.</p>
+    <p>Заполни эту анкету, чтобы я сделал тебе сайт. Пиши просто текстом, как думаешь. Где нужно — выбирай варианты. Это займет 10 минут.</p>
   </div>
 
   <form id="anketa" novalidate>
     <input type="text" class="hp" id="honeypot" name="botcheck" tabindex="-1">
 
-    <!-- 1. Контакты -->
+    <!-- 1. Главное -->
     <div class="card">
-      <div class="card-title"><span>1</span> Контакты</div>
-      <div class="card-sub">Это я сразу вставлю на страницу.</div>
+      <div class="card-title"><span>1</span> Контакты и главное</div>
+      <div class="card-sub">Самая важная информация для сайта.</div>
       
       <div class="q field-wrap">
-        <label for="f1">Как тебя подписать на сайте? <span class="req">*</span></label>
+        <label for="f1">Как тебя подписать? <span class="req">*</span></label>
         <input type="text" id="f1" placeholder="Например: Оксана — преподаватель английского">
         <div class="err-text">Напиши, как тебя представить.</div>
       </div>
       
+      <div class="q">
+        <label for="f2">Твой главный слоган (1-2 предложения)</label>
+        <span class="hint">Чтобы зацепить с первых секунд. Например: «Помогаю сдать ОГЭ/ЕГЭ без стресса» или «Быстрый и точный перевод документов».</span>
+        <input type="text" id="f2" placeholder="Твой слоган">
+      </div>
+
       <div class="q field-wrap">
-        <label for="f2">Твой номер телефона <span class="req">*</span></label>
-        <input type="tel" id="f2" placeholder="+7 999 000-00-00">
+        <label for="f3">Твой номер телефона <span class="req">*</span></label>
+        <input type="tel" id="f3" placeholder="+7 999 000-00-00">
         <div class="err-text">Нужен номер для связи.</div>
       </div>
 
       <div class="q">
-        <label for="f3">Номер WhatsApp</label>
-        <input type="tel" id="f3" placeholder="+7 999 000-00-00">
+        <label for="f4">Номер WhatsApp</label>
+        <input type="tel" id="f4" placeholder="+7 999 000-00-00">
       </div>
 
       <div class="q field-wrap">
-        <label for="f4">Адрес кабинета <span class="req">*</span></label>
-        <input type="text" id="f4" placeholder="Город, улица, дом">
+        <label for="f5">Адрес кабинета <span class="req">*</span></label>
+        <input type="text" id="f5" placeholder="Город, улица, дом">
         <div class="err-text">Укажи адрес.</div>
       </div>
     </div>
@@ -124,18 +130,18 @@
     <!-- 2. Фото -->
     <div class="card">
       <div class="card-title"><span>2</span> Фотографии</div>
-      <div class="card-sub">Файлы просто скинь мне в Вотсап или Телеграм.</div>
+      <div class="card-sub">Скинь файлы мне в Вотсап, здесь просто отметь, что есть.</div>
       
       <div class="q">
-        <label>Есть ли твое хорошее фото?</label>
+        <label>Есть ли твое хорошее фото (портрет)?</label>
         <div class="options-grid">
           <label><input type="radio" name="photo_self" value="Да, есть"><span>Да, есть</span></label>
-          <label><input type="radio" name="photo_self" value="Нет"><span>Нет</span></label>
+          <label><input type="radio" name="photo_self" value="Нет, нужно сделать"><span>Нет, нужно сделать</span></label>
         </div>
       </div>
 
       <div class="q">
-        <label>Есть ли фото кабинета?</label>
+        <label>Есть ли фото твоего кабинета?</label>
         <div class="options-grid">
           <label><input type="radio" name="photo_office" value="Да, есть"><span>Да, есть</span></label>
           <label><input type="radio" name="photo_office" value="Нет"><span>Нет</span></label>
@@ -143,49 +149,65 @@
       </div>
     </div>
 
-    <!-- 3. Текст про тебя -->
+    <!-- 3. О тебе -->
     <div class="card">
-      <div class="card-title"><span>3</span> Текст про тебя</div>
-      <div class="card-sub">Пара предложений для блока «Обо мне».</div>
+      <div class="card-title"><span>3</span> Текст «Обо мне»</div>
+      <div class="card-sub">Этот текст пойдет в блок знакомства с тобой.</div>
       
       <div class="q">
-        <label for="f5">Какое у тебя образование?</label>
-        <input type="text" id="f5" placeholder="Вуз, специальность">
+        <label for="f6">Твое образование и стаж</label>
+        <input type="text" id="f6" placeholder="Например: ЮФУ, факультет лингвистики. Стаж 10 лет.">
       </div>
 
       <div class="q">
-        <label for="f6">Сколько лет ты работаешь?</label>
-        <input type="text" id="f6" placeholder="Например: стаж 10 лет">
+        <label for="f7">Есть ли сертификаты или повышения квалификации?</label>
+        <input type="text" id="f7" placeholder="Например: IELTS, курсы по методике преподавания">
       </div>
 
       <div class="q">
-        <label for="f7">Как ты учишь?</label>
-        <span class="hint">Например: «объясняю простым языком», «много разговариваем на уроке», «занимаемся по учебникам».</span>
-        <textarea id="f7"></textarea>
+        <label for="f8">Почему ученики идут к тебе?</label>
+        <span class="hint">Твоя фишка. Например: «у меня на уроках не страшно ошибаться», «учу понимать язык, а не зубрить».</span>
+        <textarea id="f8"></textarea>
       </div>
     </div>
 
     <!-- 4. Уроки -->
     <div class="card">
       <div class="card-title"><span>4</span> Уроки</div>
-      <div class="card-sub">Что написать в блоке с услугами.</div>
+      <div class="card-sub">Что написать в блоке с обучением.</div>
       
       <div class="q">
-        <label for="f8">Какие языки преподаешь?</label>
-        <input type="text" id="f8" placeholder="Например: английский, немецкий">
-      </div>
-
-      <div class="q">
-        <label for="f9">С какими классами работаешь?</label>
-        <input type="text" id="f9" placeholder="Например: с 1 по 9 класс, или только взрослые">
-      </div>
-
-      <div class="q">
-        <label>Занятия только в кабинете или есть онлайн?</label>
+        <label>С кем ты работаешь?</label>
         <div class="options-grid">
-          <label><input type="radio" name="format" value="Только офлайн"><span>Только в кабинете</span></label>
-          <label><input type="radio" name="format" value="Офлайн и онлайн"><span>В кабинете и онлайн</span></label>
+          <label><input type="checkbox" name="students" value="Дошкольники"><span>Дошкольники</span></label>
+          <label><input type="checkbox" name="students" value="1-4 класс"><span>1-4 класс</span></label>
+          <label><input type="checkbox" name="students" value="5-8 класс"><span>5-8 класс</span></label>
+          <label><input type="checkbox" name="students" value="9-11 класс"><span>9-11 класс</span></label>
+          <label><input type="checkbox" name="students" value="Взрослые"><span>Взрослые</span></label>
         </div>
+      </div>
+
+      <div class="q">
+        <label>Готовишь ли ты к экзаменам?</label>
+        <div class="options-grid">
+          <label><input type="checkbox" name="exams" value="ОГЭ"><span>ОГЭ</span></label>
+          <label><input type="checkbox" name="exams" value="ЕГЭ"><span>ЕГЭ</span></label>
+          <label><input type="checkbox" name="exams" value="Не готовлю"><span>Не готовлю</span></label>
+        </div>
+      </div>
+
+      <div class="q">
+        <label>Как проходят занятия?</label>
+        <div class="options-grid">
+          <label><input type="radio" name="format" value="Только в кабинете"><span>Только в кабинете</span></label>
+          <label><input type="radio" name="format" value="В кабинете и онлайн"><span>В кабинете и онлайн</span></label>
+        </div>
+      </div>
+
+      <div class="q">
+        <label for="f9">Как ты задаешь домашку?</label>
+        <span class="hint">Строго спрашиваешь или нет? Помогаешь с домашкой из школы?</span>
+        <input type="text" id="f9" placeholder="Твои правила по домашке">
       </div>
 
       <div class="q">
@@ -201,49 +223,84 @@
     <!-- 5. Переводы -->
     <div class="card">
       <div class="card-title"><span>5</span> Переводы</div>
-      <div class="card-sub">Информация про услуги перевода.</div>
+      <div class="card-sub">Услуги перевода документов и текстов.</div>
       
       <div class="q">
-        <label for="f10">Какие языки переводишь?</label>
-        <input type="text" id="f10" placeholder="Например: английский">
+        <label>Какие языки переводишь?</label>
+        <input type="text" id="f10" placeholder="Например: английский, немецкий">
       </div>
 
       <div class="q">
-        <label for="f11">Что переводишь?</label>
-        <textarea id="f11" placeholder="Например: тексты, документы, нотариальные"></textarea>
+        <label>Что конкретно переводишь?</label>
+        <div class="options-grid">
+          <label><input type="checkbox" name="trans_type" value="Тексты"><span>Тексты</span></label>
+          <label><input type="checkbox" name="trans_type" value="Документы (паспорт, диплом)"><span>Документы</span></label>
+          <label><input type="checkbox" name="trans_type" value="Нотариальные"><span>Нотариальные</span></label>
+          <label><input type="checkbox" name="trans_type" value="Устные"><span>Устные</span></label>
+        </div>
       </div>
 
       <div class="q">
-        <label>Как ты их принимаешь?</label>
+        <label for="f11">Делаешь ли ты срочные переводы?</label>
+        <input type="text" id="f11" placeholder="Например: да, паспорт за 1 час">
+      </div>
+
+      <div class="q">
+        <label>Как клиенты передают тебе файлы?</label>
         <div class="options-grid">
           <label><input type="radio" name="trans_how" value="Приходят в кабинет"><span>Приходят в кабинет</span></label>
-          <label><input type="radio" name="trans_how" value="По Вотсапу/Почте"><span>По Вотсапу/Почте</span></label>
+          <label><input type="radio" name="trans_how" value="Присылают в Вотсап/на почту"><span>Присылают онлайн</span></label>
+          <label><input type="radio" name="trans_how" value="И так, и так"><span>И так, и так</span></label>
         </div>
       </div>
     </div>
 
-    <!-- 6. Отзывы -->
+    <!-- 6. Результаты и отзывы -->
     <div class="card">
-      <div class="card-title"><span>6</span> Отзывы</div>
-      <div class="card-sub">Скинь пару отзывов текстом или скриншотами в мессенджер.</div>
+      <div class="card-title"><span>6</span> Результаты и отзывы</div>
+      <div class="card-sub">То, что убеждает клиентов выбрать тебя.</div>
       
       <div class="q">
-        <label for="f12">Текст отзывов</label>
-        <textarea id="f12" placeholder="Вставь сюда пару отзывов..."></textarea>
+        <label for="f12">Есть ли крутые результаты у учеников?</label>
+        <span class="hint">Например: «Сдал ЕГЭ на 95 баллов», «Поступил в МГУ», «Выучил с нуля до разговорного».</span>
+        <textarea id="f12"></textarea>
+      </div>
+
+      <div class="q">
+        <label for="f13">Текст пары отзывов</label>
+        <span class="hint">Скопируй сюда пару отзывов с Яндекса или из Вотсапа.</span>
+        <textarea id="f13"></textarea>
       </div>
     </div>
 
-    <!-- 7. Цвета -->
+    <!-- 7. FAQ (Частые вопросы) -->
     <div class="card">
-      <div class="card-title"><span>7</span> Цвета</div>
-      <div class="card-sub">Чтобы я не нарисовал тебе розовый сайт, если ты его ненавидишь.</div>
+      <div class="card-title"><span>7</span> Частые вопросы (FAQ)</div>
+      <div class="card-sub">О чем тебя чаще всего спрашивают? Напиши 3 вопроса и ответы на них.</div>
+      
+      <div class="q">
+        <label for="f14">Вопросы и ответы</label>
+        <textarea id="f14" style="min-height: 120px;" placeholder="Вопрос: Что делать, если мы пропустим урок из-за болезни?&#10;Ответ: Переносим занятие на другое время, оно не сгорает.&#10;&#10;Вопрос: ...&#10;Ответ: ..."></textarea>
+      </div>
+    </div>
+
+    <!-- 8. Оформление -->
+    <div class="card">
+      <div class="card-title"><span>8</span> Оформление</div>
+      <div class="card-sub">Как должен выглядеть сайт.</div>
       
       <div class="q">
         <label>Какие цвета тебе больше нравятся?</label>
         <div class="options-grid">
-          <label><input type="radio" name="colors" value="Спокойные (бежевый, серый, синий)"><span>Спокойные</span></label>
-          <label><input type="radio" name="colors" value="Поярче"><span>Поярче</span></label>
+          <label><input type="radio" name="colors" value="Спокойные (бежевый, синий, серый)"><span>Спокойные</span></label>
+          <label><input type="radio" name="colors" value="Яркие и современные"><span>Поярче</span></label>
         </div>
+      </div>
+
+      <div class="q">
+        <label for="f15">Скинь 2-3 ссылки на сайты, которые тебе нравятся</label>
+        <span class="hint">Любые сайты (блоги, магазины). Мне нужно понять твой вкус.</span>
+        <textarea id="f15" placeholder="https://site1.ru&#10;https://site2.ru"></textarea>
       </div>
     </div>
 
@@ -258,8 +315,8 @@
 <script>
 (function () {
   "use strict";
-  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12"];
-  var KEY = "anketa_oksana_final";
+  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15"];
+  var KEY = "anketa_oksana_final_v2";
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
@@ -268,7 +325,7 @@
     var data = {}, i, inputs;
     for (i = 0; i < FIELDS.length; i++) if ($(FIELDS[i])) data[FIELDS[i]] = $(FIELDS[i]).value;
     data._checks = [];
-    inputs = document.querySelectorAll("input[type=radio]:checked");
+    inputs = document.querySelectorAll("input[type=radio]:checked, input[type=checkbox]:checked");
     for (i = 0; i < inputs.length; i++) data._checks.push(inputs[i].name + "|" + inputs[i].value);
     try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
   }
@@ -283,7 +340,7 @@
     if (data._checks) {
       for (i = 0; i < data._checks.length; i++) set[data._checks[i]] = 1;
     }
-    inputs = document.querySelectorAll("input[type=radio]");
+    inputs = document.querySelectorAll("input[type=radio], input[type=checkbox]");
     for (i = 0; i < inputs.length; i++) inputs[i].checked = !!set[inputs[i].name + "|" + inputs[i].value];
   }
 
@@ -299,7 +356,7 @@
 
   function validateForm() {
     var firstBad = null;
-    ["f1","f2","f4"].forEach(function(id) {
+    ["f1","f3","f5"].forEach(function(id) {
       var v = $(id).value.trim();
       markError(id, !v);
       if (!v && !firstBad) firstBad = id;
@@ -321,23 +378,29 @@
     }
     return [
       ["1. Подпись", val("f1")], 
-      ["1. Телефон", val("f2")], 
-      ["1. WhatsApp", val("f3")],
-      ["1. Адрес", val("f4")],
+      ["1. Слоган", val("f2")], 
+      ["1. Телефон", val("f3")],
+      ["1. WhatsApp", val("f4")],
+      ["1. Адрес", val("f5")],
       ["2. Фото себя", group("photo_self")], 
       ["2. Фото кабинета", group("photo_office")],
-      ["3. Образование", val("f5")], 
-      ["3. Стаж", val("f6")], 
-      ["3. Как учу", val("f7")],
-      ["4. Языки", val("f8")], 
-      ["4. Классы", val("f9")], 
+      ["3. Образование и стаж", val("f6")], 
+      ["3. Сертификаты", val("f7")], 
+      ["3. Фишка", val("f8")],
+      ["4. Ученики", group("students")], 
+      ["4. Экзамены", group("exams")], 
       ["4. Формат", group("format")], 
+      ["4. Домашка", val("f9")],
       ["4. Пробное", group("trial")],
-      ["5. Языки переводов", val("f10")], 
-      ["5. Что переводит", val("f11")], 
-      ["5. Как принимает", group("trans_how")],
-      ["6. Отзывы", val("f12")],
-      ["7. Цвета", group("colors")]
+      ["5. Языки перевода", val("f10")], 
+      ["5. Типы переводов", group("trans_type")], 
+      ["5. Срочные", val("f11")], 
+      ["5. Как передают", group("trans_how")],
+      ["6. Результаты", val("f12")], 
+      ["6. Отзывы", val("f13")],
+      ["7. FAQ", val("f14")],
+      ["8. Цвета", group("colors")], 
+      ["8. Примеры сайтов", val("f15")]
     ];
   }
 
@@ -367,7 +430,7 @@
   }
 
   function sendEmail() {
-    if (!validateForm()) { show("Заполни обязательные поля (подпись, телефон, адрес).", false); return; }
+    if (!validateForm()) { show("Заполни обязательные поля.", false); return; }
     var btn = $("btn-email");
     var old = btn.textContent;
     btn.textContent = "Отправка...";
