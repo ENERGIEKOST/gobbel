@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Анкета для разработки сайта</title>
+<title>Бриф на разработку сайта</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f3f4f6;           /* Светло-серый, чистый фон */
+    --bg: #f8fafc;           
     --card: #ffffff;
-    --text: #111827;         /* Почти черный, контрастный */
-    --text-muted: #6b7280;
-    --primary: #2563eb;      /* Современный синий */
+    --text: #0f172a;         
+    --text-muted: #64748b;
+    --primary: #2563eb;      
     --primary-hover: #1d4ed8;
-    --border: #e5e7eb;
-    --ok: #059669;
+    --border: #e2e8f0;
     --err: #dc2626;
   }
 
@@ -31,22 +30,18 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-  }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; }
 
   /* --- Шапка --- */
   .header { text-align: center; margin-bottom: 40px; }
-  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; color: var(--text); }
-  .header p { color: var(--text-muted); font-size: 16px; max-width: 500px; margin: 0 auto; }
+  .header h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; color: var(--text); }
+  .header p { color: var(--text-muted); font-size: 16px; max-width: 540px; margin: 0 auto; }
 
   /* --- Прогресс --- */
   .progress-container {
     margin-top: 24px;
     background: var(--card);
-    padding: 16px 20px;
+    padding: 16px 24px;
     border-radius: 12px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     display: flex;
@@ -56,122 +51,55 @@
     margin-left: auto;
     margin-right: auto;
   }
-  .progress-bar {
-    flex-grow: 1;
-    height: 8px;
-    background: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    width: 0;
-    background: var(--primary);
-    transition: width 0.3s ease;
-    border-radius: 4px;
-  }
-  .progress-text {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    white-space: nowrap;
-  }
+  .progress-bar { flex-grow: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0; background: var(--primary); transition: width 0.3s ease; border-radius: 4px; }
+  .progress-text { font-size: 13px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
 
-  /* --- Карточки (Секции) --- */
+  /* --- Карточки --- */
   .card {
     background: var(--card);
     border-radius: 16px;
     padding: 32px;
     margin-bottom: 24px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -1px rgba(0,0,0,0.02);
     border: 1px solid var(--border);
   }
-  .card-title {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .card-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
   .card-title span {
-    background: var(--primary);
-    color: white;
-    width: 28px;
-    height: 28px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    font-size: 14px;
+    background: var(--primary); color: white; width: 30px; height: 30px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 8px; font-size: 15px;
   }
-  .card-sub {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 24px;
-  }
+  .card-sub { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
 
-  /* --- Поля ввода --- */
+  /* --- Поля --- */
   .q { margin-bottom: 24px; }
-  .q label { display: block; font-weight: 500; margin-bottom: 8px; font-size: 15px; color: var(--text); }
+  .q label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 15px; color: var(--text); }
   .q .hint { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: normal; }
   
   input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 15px;
-    color: var(--text);
-    background: #f9fafb;
-    transition: all 0.2s;
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px;
+    font-family: inherit; font-size: 15px; color: var(--text); background: #f8fafc; transition: all 0.2s;
   }
   input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: #fff;
+    outline: none; border-color: var(--primary); background: #fff;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
   }
-  textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
+  textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
   
   .q-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 600px) { .q-row { grid-template-columns: 1fr; } }
 
-  /* --- Чекбоксы / Радио --- */
+  /* --- Опции (Чекбоксы/Радио) --- */
   .options-grid { display: flex; flex-wrap: wrap; gap: 10px; }
   .options-grid label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: #f9fafb;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    user-select: none;
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px;
+    background: #f8fafc; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; user-select: none;
   }
   .options-grid label:hover { border-color: var(--primary); background: #fff; }
-  .options-grid input:checked + span { color: var(--primary); font-weight: 600; }
-  .options-grid label:has(input:checked) {
-    border-color: var(--primary);
-    background: #eff6ff;
-  }
+  .options-grid label:has(input:checked) { border-color: var(--primary); background: #eff6ff; }
   .options-grid input { width: 16px; height: 16px; accent-color: var(--primary); }
-
-  /* --- FAQ Блок (Специально) --- */
-  .faq-pair {
-    background: #f9fafb;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    margin-bottom: 16px;
-  }
-  .faq-pair input { margin-bottom: 12px; background: #fff; font-weight: 600; }
-  .faq-pair textarea { background: #fff; }
 
   /* --- Ошибки --- */
   .field-wrap.error input, .field-wrap.error textarea { border-color: var(--err); background: #fef2f2; }
@@ -179,23 +107,13 @@
   .field-wrap.error .err-text { display: block; }
   .req { color: var(--err); }
 
-  /* --- Блок действий (внизу) --- */
+  /* --- Кнопки --- */
   .actions { text-align: center; margin-top: 40px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
-  
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    padding: 16px 24px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-    font-family: inherit;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 100%; max-width: 400px; padding: 16px 24px; border-radius: 10px;
+    font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    border: none; font-family: inherit;
   }
   .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
   .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
@@ -203,13 +121,8 @@
   .btn-outline:hover { background: #fff; border-color: var(--text-muted); }
   
   .msg {
-    display: none;
-    padding: 16px;
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 15px;
-    max-width: 500px;
-    margin: 0 auto;
+    display: none; padding: 16px; border-radius: 10px; font-weight: 500; font-size: 15px;
+    max-width: 500px; margin: 0 auto; text-align: left;
   }
   .msg.ok { background: #ecfdf5; color: #065f46; border: 1px solid #34d399; display: block; }
   .msg.bad { background: #fef2f2; color: #991b1b; border: 1px solid #f87171; display: block; }
@@ -219,7 +132,6 @@
   .btn-link:hover { color: var(--primary); }
 
   .footer-note { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 40px; }
-  
   .hp { position: absolute; left: -9999px; opacity: 0; }
 </style>
 </head>
@@ -227,199 +139,169 @@
 
 <div class="wrap">
   <div class="header">
-    <h1>Анкета для разработки сайта</h1>
-    <p>Заполните этот бриф, чтобы мы могли создать для вас идеальный сайт. Черновик сохраняется автоматически.</p>
+    <h1>Бриф на разработку сайта</h1>
+    <p>Заполните эту анкету, чтобы мы могли точно понять ваши задачи, цели и пожелания. Это ускорит запуск вашего проекта.</p>
     
     <div class="progress-container">
       <div class="progress-bar"><div class="progress-fill" id="pfill"></div></div>
-      <div class="progress-text" id="plabel">Заполнено 0 из 7</div>
+      <div class="progress-text" id="plabel">Заполнено 0 из 6</div>
     </div>
   </div>
 
   <form id="anketa" novalidate>
     <input type="text" class="hp" id="honeypot" name="botcheck" tabindex="-1" autocomplete="off">
 
-    <!-- 1. Основное -->
+    <!-- 1. Общая информация -->
     <div class="card">
-      <div class="card-title"><span>1</span> Основное о центре</div>
-      <div class="card-sub">Это пойдет на главный экран сайта и в шапку.</div>
+      <div class="card-title"><span>1</span> О проекте</div>
+      <div class="card-sub">Самая важная информация о вашем бизнесе.</div>
       
       <div class="q field-wrap">
-        <label for="f1">Название языкового центра <span class="req">*</span></label>
-        <input type="text" id="f1" placeholder="Например: Языковой центр «Мир»">
-        <div class="err-text">Пожалуйста, укажите название.</div>
+        <label for="f1">Название компании / проекта <span class="req">*</span></label>
+        <input type="text" id="f1" placeholder="Например: Кофейня «Бодрость»">
+        <div class="err-text">Укажите название.</div>
       </div>
       
       <div class="q-row">
         <div class="q field-wrap">
-          <label for="f2">Ваше имя (как подписать на сайте) <span class="req">*</span></label>
-          <input type="text" id="f2" placeholder="Марина Иванова">
+          <label for="f2">Ваше имя <span class="req">*</span></label>
+          <input type="text" id="f2" placeholder="Иван Иванов">
           <div class="err-text">Укажите ваше имя.</div>
         </div>
         <div class="q field-wrap">
-          <label for="f3">Стаж преподавания <span class="req">*</span></label>
-          <input type="text" id="f3" placeholder="20 лет">
-          <div class="err-text">Укажите стаж.</div>
+          <label for="f3">Телефон или Telegram <span class="req">*</span></label>
+          <input type="text" id="f3" placeholder="+7 999 000-00-00">
+          <div class="err-text">Укажите контакт для связи.</div>
         </div>
       </div>
 
       <div class="q">
-        <label for="f4">Главный заголовок и подзаголовок</label>
-        <span class="hint">Одно короткое предложение, которое зацепит клиента. Например: "Английский, на котором вы заговорите уже через месяц".</span>
-        <textarea id="f4" placeholder="Введите заголовок для главного экрана..."></textarea>
+        <label for="f4">Чем занимается ваш бизнес? (Кратко)</label>
+        <textarea id="f4" placeholder="Например: обжариваем кофе и продаем его оптом в рестораны, а также у нас есть 3 розничные точки."></textarea>
       </div>
 
       <div class="q">
-        <label for="f5">Город и адрес (если занятия офлайн)</label>
-        <input type="text" id="f5" placeholder="Батайск, ул. Коммунистическая, 205">
-      </div>
-    </div>
-
-    <!-- 2. Опыт -->
-    <div class="card">
-      <div class="card-title"><span>2</span> Опыт и методика</div>
-      <div class="card-sub">Блок "Обо мне". Чем подробнее, тем больше доверия от клиентов.</div>
-      
-      <div class="q">
-        <label for="f6">Какое у вас образование?</label>
-        <input type="text" id="f6" placeholder="Вуз, специальность, год окончания">
-      </div>
-      <div class="q">
-        <label for="f7">Сертификаты (IELTS, TOEFL, Cambridge)</label>
-        <input type="text" id="f7" placeholder="Например: CAE, TKT">
-      </div>
-      <div class="q">
-        <label for="f8">Чем ваша методика отличается от других?</label>
-        <textarea id="f8" placeholder="В 3-4 предложениях опишите ваш подход. Например: 'Учу через сериалы, никакой зубрежки'"></textarea>
-      </div>
-    </div>
-
-    <!-- 3. Услуги -->
-    <div class="card">
-      <div class="card-title"><span>3</span> Услуги и цены</div>
-      <div class="card-sub">Что вы предлагаете и сколько это стоит.</div>
-      
-      <div class="q">
-        <label>Кого вы обучаете? (можно выбрать несколько)</label>
-        <div class="options-grid" id="svc-list">
-          <label><input type="checkbox" class="svc" value="Дети от 5 лет"><span>Дети от 5 лет</span></label>
-          <label><input type="checkbox" class="svc" value="Школьники 1-4 кл"><span>Школьники 1-4 кл</span></label>
-          <label><input type="checkbox" class="svc" value="Школьники 5-8 кл"><span>Школьники 5-8 кл</span></label>
-          <label><input type="checkbox" class="svc" value="Подготовка к ОГЭ"><span>Подготовка к ОГЭ</span></label>
-          <label><input type="checkbox" class="svc" value="Подготовка к ЕГЭ"><span>Подготовка к ЕГЭ</span></label>
-          <label><input type="checkbox" class="svc" value="Взрослые с нуля"><span>Взрослые с нуля</span></label>
-          <label><input type="checkbox" class="svc" value="Разговорный клуб"><span>Разговорный клуб</span></label>
-          <label><input type="checkbox" class="svc" value="Бизнес-английский"><span>Бизнес-английский</span></label>
-          <label><input type="checkbox" class="svc" value="Переводы"><span>Переводы</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <label for="f11">Стоимость занятий</label>
-        <span class="hint">Укажите цены за час/занятие или напишите "от ... до ..."</span>
-        <textarea id="f11" placeholder="Например: Индивидуально — 1000 руб/час. Мини-группа — 700 руб/час."></textarea>
-      </div>
-
-      <div class="q">
-        <label>Есть ли пробное занятие?</label>
+        <label>Главная цель сайта? (Можно выбрать несколько)</label>
         <div class="options-grid">
-          <label><input type="radio" name="trial" value="Да, бесплатное"><span>Да, бесплатное</span></label>
-          <label><input type="radio" name="trial" value="Да, платное"><span>Да, платное</span></label>
-          <label><input type="radio" name="trial" value="Нет"><span>Нет</span></label>
+          <label><input type="checkbox" name="goal" value="Сайт-визитка"><span>Сайт-визитка</span></label>
+          <label><input type="checkbox" name="goal" value="Продажа товаров (Магазин)"><span>Продажа товаров</span></label>
+          <label><input type="checkbox" name="goal" value="Сбор заявок / Лиды"><span>Сбор заявок</span></label>
+          <label><input type="checkbox" name="goal" value="Запись на услуги"><span>Запись на услуги</span></label>
+          <label><input type="checkbox" name="goal" value="Блог / Портфолио"><span>Блог / Портфолио</span></label>
         </div>
       </div>
+    </div>
+
+    <!-- 2. Контент и структура -->
+    <div class="card">
+      <div class="card-title"><span>2</span> Структура и контент</div>
+      <div class="card-sub">Какие разделы нужны на сайте и есть ли у вас материалы.</div>
       
       <div class="q">
-        <label>Формат занятий</label>
+        <label for="f5">Какие страницы/разделы обязательно должны быть на сайте?</label>
+        <textarea id="f5" placeholder="Например: Главная, Каталог, О нас, Доставка и оплата, Контакты."></textarea>
+      </div>
+
+      <div class="q">
+        <label>Готовы ли тексты и фотографии для сайта?</label>
         <div class="options-grid">
-          <label><input type="radio" name="format" value="Только очно"><span>Только очно</span></label>
-          <label><input type="radio" name="format" value="Только онлайн"><span>Только онлайн</span></label>
-          <label><input type="radio" name="format" value="Очно и онлайн"><span>Очно и онлайн</span></label>
+          <label><input type="radio" name="content_ready" value="Всё готово"><span>Всё готово</span></label>
+          <label><input type="radio" name="content_ready" value="Нужна помощь с текстами"><span>Нужна помощь с текстами</span></label>
+          <label><input type="radio" name="content_ready" value="Нужен фотограф"><span>Нужен фотограф</span></label>
+          <label><input type="radio" name="content_ready" value="Ничего нет"><span>Ничего нет</span></label>
         </div>
       </div>
-    </div>
-
-    <!-- 4. Отзывы -->
-    <div class="card">
-      <div class="card-title"><span>4</span> Результаты и отзывы</div>
-      <div class="card-sub">Социальное доказательство. Очень важно для продаж.</div>
       
       <div class="q">
-        <label for="f14">Достижения ваших учеников</label>
-        <textarea id="f14" placeholder="Например: 'ЕГЭ на 95 баллов', 'Поступила в МГУ', 'Переехала в США и прошла собеседование'"></textarea>
-      </div>
-
-      <div class="q">
-        <label for="f15">Отзыв №1 (Имя и текст)</label>
-        <textarea id="f15" placeholder="Анна, мама Миши (7 лет): 'Ребенок полюбил английский, теперь сам просит включить мультики на английском!'"></textarea>
-      </div>
-      
-      <div class="q">
-        <label for="f16">Отзыв №2 (Имя и текст)</label>
-        <textarea id="f16"></textarea>
+        <label for="f6">Ссылки на ваши текущие соцсети или старый сайт (если есть)</label>
+        <input type="text" id="f6" placeholder="https://vk.com/... или https://instagram.com/...">
       </div>
     </div>
 
-    <!-- 5. Контакты -->
+    <!-- 3. Функционал и особенности -->
     <div class="card">
-      <div class="card-title"><span>5</span> Контакты для сайта</div>
-      <div class="card-sub">Как клиенты смогут с вами связаться.</div>
+      <div class="card-title"><span>3</span> Функционал</div>
+      <div class="card-sub">Какие технические «фишки» нужны на сайте.</div>
       
-      <div class="q field-wrap">
-        <label for="f19">Телефон <span class="req">*</span></label>
-        <input type="tel" id="f19" placeholder="+7 928 000-00-00">
-        <div class="err-text">Введите корректный номер телефона.</div>
+      <div class="q">
+        <label>Что должен уметь сайт? (Отметьте нужное)</label>
+        <div class="options-grid">
+          <label><input type="checkbox" name="features" value="Форма обратной связи"><span>Форма связи</span></label>
+          <label><input type="checkbox" name="features" value="Онлайн-оплата"><span>Онлайн-оплата</span></label>
+          <label><input type="checkbox" name="features" value="Каталог товаров с корзиной"><span>Каталог/Корзина</span></label>
+          <label><input type="checkbox" name="features" value="Личный кабинет"><span>Личный кабинет</span></label>
+          <label><input type="checkbox" name="features" value="Калькулятор"><span>Калькулятор</span></label>
+          <label><input type="checkbox" name="features" value="Интеграция с CRM"><span>Интеграция с CRM</span></label>
+          <label><input type="checkbox" name="features" value="Мультиязычность"><span>Мультиязычность</span></label>
+        </div>
       </div>
 
       <div class="q">
-        <label for="f22">Ссылка на ваш профиль ВКонтакте или Instagram*</label>
-        <input type="url" id="f22" placeholder="https://vk.com/...">
-      </div>
-      
-      <div class="q">
-        <label for="f20">Ваш ник в Telegram или номер WhatsApp</label>
-        <input type="text" id="f20" placeholder="@nickname или +7...">
+        <label for="f7">Опишите другие важные детали функционала (если есть)</label>
+        <textarea id="f7" placeholder="Например: клиент должен видеть статус своего заказа, или нужна онлайн-запись по времени."></textarea>
       </div>
     </div>
 
-    <!-- 6. Дизайн -->
+    <!-- 4. Дизайн -->
     <div class="card">
-      <div class="card-title"><span>6</span> Пожелания по дизайну</div>
-      <div class="card-sub">Помогите нам сделать сайт, который понравится именно вам.</div>
+      <div class="card-title"><span>4</span> Дизайн и стиль</div>
+      <div class="card-sub">Чтобы сайт отражал суть вашего бренда.</div>
       
       <div class="q">
         <label>Какой стиль вам ближе?</label>
         <div class="options-grid">
-          <label><input type="radio" name="style" value="Строгий и деловой"><span>Строгий и деловой</span></label>
-          <label><input type="radio" name="style" value="Тёплый и уютный"><span>Тёплый и уютный</span></label>
-          <label><input type="radio" name="style" value="Яркий и креативный"><span>Яркий и креативный</span></label>
+          <label><input type="radio" name="style" value="Строгий, корпоративный"><span>Строгий, корпоративный</span></label>
+          <label><input type="radio" name="style" value="Современный, минимализм"><span>Современный, минимализм</span></label>
+          <label><input type="radio" name="style" value="Яркий, креативный"><span>Яркий, креативный</span></label>
+          <label><input type="radio" name="style" value="Тёплый, душевный"><span>Тёплый, душевный</span></label>
         </div>
       </div>
-      
+
       <div class="q">
-        <label for="f24">Есть ли цвета, которые вам нравятся или примеры сайтов?</label>
-        <input type="text" id="f24" placeholder="Например: нравится синий и белый, или сайт skyeng.ru">
+        <label for="f8">Пришлите ссылки на 2-3 сайта, которые вам нравятся (референсы)</label>
+        <span class="hint">Это очень поможет дизайнеру понять ваш вкус.</span>
+        <textarea id="f8" placeholder="https://site1.ru&#10;https://site2.ru"></textarea>
+      </div>
+
+      <div class="q">
+        <label for="f9">Есть ли фирменные цвета, логотип или брендбук?</label>
+        <input type="text" id="f9" placeholder="Например: есть логотип (пришлю файлом), основной цвет — темно-зеленый.">
       </div>
     </div>
 
-    <!-- 7. FAQ -->
+    <!-- 5. Организация и сроки -->
     <div class="card">
-      <div class="card-title"><span>7</span> Частые вопросы (FAQ)</div>
-      <div class="card-sub">Вопросы, которые клиенты чаще всего задают по телефону. Мы разместим их на сайте, чтобы снять возражения.</div>
+      <div class="card-title"><span>5</span> Организационные вопросы</div>
+      <div class="card-sub">Планирование запуска проекта.</div>
       
-      <div class="faq-pair">
-        <input type="text" id="faq_q1" placeholder="Вопрос 1 (Например: Как проходят занятия?)" style="font-weight:600;">
-        <textarea id="faq_a1" placeholder="Ответ на вопрос 1"></textarea>
+      <div class="q">
+        <label>Есть ли уже домен и хостинг?</label>
+        <div class="options-grid">
+          <label><input type="radio" name="tech_ready" value="Да, всё есть"><span>Да, всё есть</span></label>
+          <label><input type="radio" name="tech_ready" value="Есть домен, нет хостинга"><span>Только домен</span></label>
+          <label><input type="radio" name="tech_ready" value="Нет, нужна помощь"><span>Ничего нет</span></label>
+        </div>
       </div>
 
-      <div class="faq-pair">
-        <input type="text" id="faq_q2" placeholder="Вопрос 2 (Например: Что делать, если я пропустил урок?)" style="font-weight:600;">
-        <textarea id="faq_a2" placeholder="Ответ на вопрос 2"></textarea>
+      <div class="q">
+        <label>Когда вам нужен готовый сайт?</label>
+        <div class="options-grid">
+          <label><input type="radio" name="deadline" value="Срочно (до 2 недель)"><span>Срочно (до 2 недель)</span></label>
+          <label><input type="radio" name="deadline" value="В течение месяца"><span>В течение месяца</span></label>
+          <label><input type="radio" name="deadline" value="1-2 месяца"><span>1-2 месяца</span></label>
+          <label><input type="radio" name="deadline" value="Без спешки, главное качество"><span>Без спешки</span></label>
+        </div>
       </div>
 
-      <div class="faq-pair">
-        <input type="text" id="faq_q3" placeholder="Вопрос 3" style="font-weight:600;">
-        <textarea id="faq_a3" placeholder="Ответ на вопрос 3"></textarea>
+      <div class="q">
+        <label for="f10">Какой ориентировочный бюджет на разработку?</label>
+        <span class="hint">Это поможет сразу подобрать подходящие технологии и объем работ.</span>
+        <div class="options-grid">
+          <label><input type="radio" name="budget" value="До 30 000 руб."><span>До 30 тыс.</span></label>
+          <label><input type="radio" name="budget" value="30 000 - 70 000 руб."><span>30 - 70 тыс.</span></label>
+          <label><input type="radio" name="budget" value="70 000 - 150 000 руб."><span>70 - 150 тыс.</span></label>
+          <label><input type="radio" name="budget" value="Более 150 000 руб."><span>Более 150 тыс.</span></label>
+        </div>
       </div>
     </div>
 
@@ -438,83 +320,73 @@
     </div>
   </div>
 
-  <div class="footer-note">Черновик сохраняется в этом браузере. При отправке данные уходят на почту разработчика.</div>
+  <div class="footer-note">Черновик сохраняется в этом браузере. При отправке данные уходят на почту веб-разработчика.</div>
 </div>
 
 <script>
 (function () {
   "use strict";
-  var FIELDS = [
-    "f1","f2","f3","f4","f5","f6","f7","f8","f11","f14","f15","f16",
-    "f19","f20","f22","f24","faq_q1","faq_a1","faq_q2","faq_a2","faq_q3","faq_a3"
-  ];
-  var KEY = "anketa_draft_v8";
+  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10"];
+  var KEY = "brief_draft_v1";
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
 
   /* ---------- Черновик ---------- */
   function saveDraft(silent) {
-    var data = {}, i, boxes;
+    var data = {}, i, inputs;
     for (i = 0; i < FIELDS.length; i++) if ($(FIELDS[i])) data[FIELDS[i]] = $(FIELDS[i]).value;
-    boxes = document.querySelectorAll("input[type=checkbox], input[type=radio]");
+    
     data._checks = [];
-    for (i = 0; i < boxes.length; i++) if (boxes[i].checked) data._checks.push(boxes[i].name + "|" + boxes[i].value);
+    inputs = document.querySelectorAll("input[type=checkbox]:checked, input[type=radio]:checked");
+    for (i = 0; i < inputs.length; i++) data._checks.push(inputs[i].name + "|" + inputs[i].value);
+    
     try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
     updateProgress();
   }
 
   function loadDraft() {
-    var data, i, boxes, set = {};
+    var data, i, inputs, set = {};
     try { data = JSON.parse(localStorage.getItem(KEY)); } catch (e) { return; }
     if (!data) return;
     for (i = 0; i < FIELDS.length; i++) {
       if (data[FIELDS[i]] != null && $(FIELDS[i])) $(FIELDS[i]).value = data[FIELDS[i]];
     }
-    if (data._checks && data._checks.length) {
+    if (data._checks) {
       for (i = 0; i < data._checks.length; i++) set[data._checks[i]] = 1;
     }
-    boxes = document.querySelectorAll("input[type=checkbox], input[type=radio]");
-    for (i = 0; i < boxes.length; i++) boxes[i].checked = !!set[boxes[i].name + "|" + boxes[i].value];
+    inputs = document.querySelectorAll("input[type=checkbox], input[type=radio]");
+    for (i = 0; i < inputs.length; i++) inputs[i].checked = !!set[inputs[i].name + "|" + inputs[i].value];
   }
 
   function clearDraft() {
-    if (!confirm("Удалить все заполненные данные?")) return;
+    if (!confirm("Очистить весь бриф? Данные будут удалены.")) return;
     try { localStorage.removeItem(KEY); } catch (e) {}
     location.reload();
   }
 
   function saveAndClose() {
     saveDraft(true);
-    show("Сохранено! Можете закрыть страницу, ваши ответы не пропадут.", true);
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    show("Бриф сохранен в этом браузере. Можете закрыть страницу.", true);
   }
 
   /* ---------- Прогресс ---------- */
   function updateProgress() {
-    var secsFilled = 0;
+    var filled = 0;
     function has(id) { return $(id) && $(id).value.trim().length > 0; }
     
-    if (has("f1") || has("f2") || has("f3") || has("f4")) secsFilled++; // 1
-    if (has("f6") || has("f7") || has("f8")) secsFilled++; // 2
-    if (document.querySelector(".svc:checked") || has("f11") || document.querySelector("input[name=trial]:checked")) secsFilled++; // 3
-    if (has("f14") || has("f15") || has("f16")) secsFilled++; // 4
-    if (has("f19") || has("f20") || has("f22")) secsFilled++; // 5
-    if (document.querySelector("input[name=style]:checked") || has("f24")) secsFilled++; // 6
-    if (has("faq_q1") || has("faq_q2") || has("faq_q3")) secsFilled++; // 7
+    if (has("f1") && has("f2") && has("f3")) filled++; // 1
+    if (has("f5") || document.querySelector("input[name=content_ready]:checked")) filled++; // 2
+    if (document.querySelector("input[name=features]:checked") || has("f7")) filled++; // 3
+    if (document.querySelector("input[name=style]:checked") || has("f8")) filled++; // 4
+    if (document.querySelector("input[name=deadline]:checked") || document.querySelector("input[name=budget]:checked")) filled++; // 5
     
-    var pct = Math.round(secsFilled / 7 * 100);
+    var pct = Math.round(filled / 5 * 100);
     $("pfill").style.width = pct + "%";
-    $("plabel").textContent = "Заполнено " + secsFilled + " из 7";
+    $("plabel").textContent = "Заполнено " + filled + " из 5";
   }
 
   /* ---------- Валидация ---------- */
-  function normalizePhone(v) {
-    var d = v.replace(/\D/g, "");
-    if (d.length === 11 && d.charAt(0) === "8") d = "7" + d.slice(1);
-    return d;
-  }
-
   function markError(id, bad) {
     var el = $(id);
     if (!el) return;
@@ -527,17 +399,15 @@
 
   function validateForm() {
     var firstBad = null;
-    ["f1","f2","f3","f19"].forEach(function(id) {
+    ["f1","f2","f3"].forEach(function(id) {
       var v = $(id).value.trim();
-      var bad = !v || (id === "f19" && normalizePhone(v).length !== 11);
-      markError(id, bad);
-      if (bad && !firstBad) firstBad = id;
+      markError(id, !v);
+      if (!v && !firstBad) firstBad = id;
     });
     
     if (firstBad) {
-      var el = $(firstBad);
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-      el.focus();
+      $(firstBad).scrollIntoView({ behavior: "smooth", block: "center" });
+      $(firstBad).focus();
       return false;
     }
     return true;
@@ -546,42 +416,35 @@
   /* ---------- Сбор данных ---------- */
   function collectPairs() {
     function val(id) { var v = $(id).value.trim(); return v || "—"; }
-    function group(sel) {
-      var arr = document.querySelectorAll(sel), res = [];
-      arr.forEach(function(el) { if (el.checked) res.push(el.value); });
+    function group(name) {
+      var arr = document.querySelectorAll("input[name='" + name + "']:checked"), res = [];
+      arr.forEach(function(el) { res.push(el.value); });
       return res.length ? res.join(", ") : "—";
     }
     
     return [
       ["1. Название", val("f1")], 
       ["1. Имя", val("f2")], 
-      ["1. Стаж", val("f3")],
-      ["1. Главный заголовок", val("f4")], 
-      ["1. Адрес", val("f5")], 
-      ["2. Образование", val("f6")],
-      ["2. Сертификаты", val("f7")], 
-      ["2. Методика", val("f8")], 
-      ["3. Направления", group(".svc")], 
-      ["3. Стоимость", val("f11")],
-      ["3. Пробное", group("input[name=trial]")],
-      ["3. Формат", group("input[name=format]")],
-      ["4. Достижения", val("f14")], 
-      ["4. Отзыв 1", val("f15")], 
-      ["4. Отзыв 2", val("f16")],
-      ["5. Телефон", val("f19")], 
-      ["5. Telegram/WA", val("f20")], 
-      ["5. Соцсети", val("f22")], 
-      ["6. Стиль", group("input[name=style]")], 
-      ["6. Цвета", val("f24")],
-      ["7. FAQ 1", val("faq_q1") + " -> " + val("faq_a1")],
-      ["7. FAQ 2", val("faq_q2") + " -> " + val("faq_a2")],
-      ["7. FAQ 3", val("faq_q3") + " -> " + val("faq_a3")]
+      ["1. Контакты", val("f3")],
+      ["1. О бизнесе", val("f4")], 
+      ["1. Цель сайта", group("goal")],
+      ["2. Разделы сайта", val("f5")], 
+      ["2. Готовность контента", group("content_ready")],
+      ["2. Соцсети/Старый сайт", val("f6")],
+      ["3. Функционал", group("features")],
+      ["3. Детали функционала", val("f7")],
+      ["4. Стиль", group("style")],
+      ["4. Сайты-референсы", val("f8")],
+      ["4. Фирменный стиль", val("f9")],
+      ["5. Домен/Хостинг", group("tech_ready")],
+      ["5. Сроки", group("deadline")],
+      ["5. Бюджет", group("budget")]
     ];
   }
 
   function collect() {
     var lines = collectPairs();
-    var out = "БРИФ ДЛЯ РАЗРАБОТКИ САЙТА\n\n";
+    var out = "ТЕХНИЧЕСКОЕ ЗАДАНИЕ НА САЙТ\n\n";
     lines.forEach(function(l) { out += l[0] + ": " + l[1] + "\n"; });
     return out;
   }
@@ -591,7 +454,7 @@
     var p = {
       access_key: WEB3FORMS_KEY,
       subject: "Бриф на сайт — " + ($("f1").value.trim() || "Без названия"),
-      from_name: "Анкета разработчику"
+      from_name: "Новый клиент"
     };
     pairs.forEach(function(pair) { p[pair[0]] = pair[1]; });
     return p;
@@ -601,12 +464,12 @@
     var m = $("msg");
     m.textContent = text;
     m.className = "msg " + (ok ? "ok" : "bad");
-    setTimeout(function () { m.className = "msg"; }, 8000);
+    setTimeout(function () { m.className = "msg"; }, 10000);
   }
 
   /* ---------- Отправка ---------- */
   function sendEmail() {
-    if (!validateForm()) { show("Пожалуйста, заполните обязательные поля (отмечены *).", false); return; }
+    if (!validateForm()) { show("Заполните обязательные поля (Имя, Название, Контакты).", false); return; }
     
     var btn = $("btn-email");
     var old = btn.textContent;
@@ -623,9 +486,9 @@
       btn.textContent = old;
       btn.disabled = false;
       if (data && data.success) {
-        show("Бриф успешно отправлен разработчику! Если письмо не пришло — проверьте Спам.", true);
+        show("Бриф успешно отправлен! Я свяжусь с вами в ближайшее время.", true);
       } else {
-        show("Ошибка сервера. Попробуйте позже или скачайте файл.", false);
+        show("Ошибка сервера. Попробуйте скачать файл или связаться напрямую.", false);
       }
     })
     .catch(function () {
@@ -647,9 +510,9 @@
     var blob = new Blob([collect()], { type: "text/plain;charset=utf-8" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "brief_site.txt";
+    a.download = "tz_na_site.txt";
     a.click();
-    show("Файл скачан.", true);
+    show("Файл ТЗ скачан.", true);
   }
 
   /* ---------- Слушатели ---------- */
