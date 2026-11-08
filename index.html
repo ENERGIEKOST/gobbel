@@ -111,16 +111,16 @@
     <p>Заполни эту анкету, чтобы я сделал тебе красивый сайт. Где нужно — выбирай варианты.</p>
     <div class="progress-container">
       <div class="progress-bar"><div class="progress-fill" id="pfill"></div></div>
-      <div class="progress-text" id="plabel">Заполнено 0 из 7</div>
+      <div class="progress-text" id="plabel">Заполнено 0 из 8</div>
     </div>
   </div>
 
   <form id="anketa" novalidate>
     <input type="text" class="hp" id="honeypot" name="botcheck" tabindex="-1">
 
-    <!-- 1. Контакты и кабинет -->
+    <!-- 1. Контакты и офис -->
     <div class="card">
-      <div class="card-title"><span>1</span> Контакты и кабинет</div>
+      <div class="card-title"><span>1</span> Контакты и офис</div>
       <div class="card-sub">Как с тобой связаться и где ты находишься.</div>
       
       <div class="q field-wrap">
@@ -130,17 +130,9 @@
       </div>
       
       <div class="q field-wrap">
-        <label for="f2">Точный адрес кабинета <span class="req">*</span></label>
+        <label for="f2">Точный адрес офиса <span class="req">*</span></label>
         <input type="text" id="f2" placeholder="Город, улица, дом">
         <div class="err-text">Укажи адрес.</div>
-      </div>
-
-      <div class="q">
-        <label>Показывать ли на сайте точный адрес кабинета?</label>
-        <div class="options-grid">
-          <label><input type="radio" name="address_vis" value="Да, полностью"><span>Да, полностью</span></label>
-          <label><input type="radio" name="address_vis" value="Только город и район"><span>Только город и район</span></label>
-        </div>
       </div>
 
       <div class="q field-wrap">
@@ -219,10 +211,10 @@
       </div>
 
       <div class="q">
-        <label>Занятия только в кабинете или есть онлайн?</label>
+        <label>Занятия только в офисе или есть онлайн?</label>
         <div class="options-grid">
-          <label><input type="radio" name="format" value="Только в кабинете"><span>Только в кабинете</span></label>
-          <label><input type="radio" name="format" value="В кабинете и онлайн"><span>В кабинете и онлайн</span></label>
+          <label><input type="radio" name="format" value="Только в офисе"><span>Только в офисе</span></label>
+          <label><input type="radio" name="format" value="В офисе и онлайн"><span>В офисе и онлайн</span></label>
         </div>
       </div>
 
@@ -281,10 +273,10 @@
       </div>
     </div>
 
-    <!-- 5. Цены и запись -->
+    <!-- 5. Цены -->
     <div class="card">
-      <div class="card-title"><span>5</span> Цены и запись</div>
-      <div class="card-sub">Информация о стоимости и способах связи.</div>
+      <div class="card-title"><span>5</span> Цены</div>
+      <div class="card-sub">Информация о стоимости.</div>
       
       <div class="q field-wrap">
         <label for="f15">Сколько стоит одно занятие? <span class="req">*</span></label>
@@ -303,15 +295,6 @@
         <div class="options-grid">
           <label><input type="radio" name="prepayment" value="Да"><span>Да</span></label>
           <label><input type="radio" name="prepayment" value="Нет"><span>Нет</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <label>Как клиенты записываются или делают заказ?</label>
-        <div class="options-grid">
-          <label><input type="checkbox" name="booking" value="Звонок"><span>Звонок</span></label>
-          <label><input type="checkbox" name="booking" value="WhatsApp"><span>WhatsApp</span></label>
-          <label><input type="checkbox" name="booking" value="Сообщение в ВК"><span>Сообщение в ВК</span></label>
         </div>
       </div>
     </div>
@@ -371,9 +354,20 @@
         <label>Есть ли нормальные фото для сайта?</label>
         <div class="options-grid">
           <label><input type="checkbox" name="photos_ready" value="Портрет"><span>Портрет</span></label>
-          <label><input type="checkbox" name="photos_ready" value="Фото кабинета"><span>Фото кабинета</span></label>
+          <label><input type="checkbox" name="photos_ready" value="Фото офиса"><span>Фото офиса</span></label>
           <label><input type="checkbox" name="photos_ready" value="Нет, надо снять"><span>Нет, надо снять</span></label>
         </div>
+      </div>
+    </div>
+
+    <!-- 8. Свободное поле (ДОБАВЛЕНО) -->
+    <div class="card">
+      <div class="card-title"><span>8</span> Свободное поле</div>
+      <div class="card-sub">Тут можешь написать всё, что я забыл спросить, или что считаешь важным.</div>
+      
+      <div class="q">
+        <label for="f21">Твои дополнения</label>
+        <textarea id="f21" style="min-height: 150px;" placeholder="Пиши сюда всё, что душе угодно. Например: 'У меня есть 3 отзыва на Яндексе, я забыла скинуть' или 'Хочу, чтобы на сайте была форма записи по времени'."></textarea>
       </div>
     </div>
 
@@ -396,22 +390,19 @@
 <script>
 (function () {
   "use strict";
-  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20"];
+  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20","f21"];
   var KEY = "anketa_oksana_perfect";
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
 
-  /* ---------- Валидация и нормализация телефона ---------- */
+  /* ---------- Валидация телефона ---------- */
   function normalizePhone(v) {
     var d = v.replace(/\D/g, "");
-    // Если ввели 8 в начале и всего 11 цифр -> меняем на 7
     if (d.length === 11 && d.charAt(0) === "8") d = "7" + d.slice(1);
-    // Если ввели 10 цифр (например, без 7 и без 8) и начинается с 9 -> добавляем 7
     if (d.length === 10 && d.charAt(0) === "9") d = "7" + d;
     return d;
   }
-
   function isPhoneOk(v) {
     var d = normalizePhone(v);
     return d.length === 11 && d.charAt(0) === "7";
@@ -464,10 +455,11 @@
     if (has("f15") || has("f16")) filled++;
     if (has("f17") || has("f18")) filled++;
     if (has("f19") || document.querySelector("input[name=first_screen]:checked")) filled++;
+    if (has("f21")) filled++;
     
-    var pct = Math.round(filled / 7 * 100);
+    var pct = Math.round(filled / 8 * 100);
     $("pfill").style.width = pct + "%";
-    $("plabel").textContent = "Заполнено " + filled + " из 7";
+    $("plabel").textContent = "Заполнено " + filled + " из 8";
   }
 
   /* ---------- Ошибки ---------- */
@@ -515,13 +507,14 @@
       return res.length ? res.join(", ") : "—";
     }
     return [
-      ["1. Подпись", val("f1")], ["1. Адрес", val("f2")], ["1. Показывать адрес", group("address_vis")], ["1. Телефон", val("f3")], ["1. WhatsApp", val("f4")], ["1. График", val("f5")],
+      ["1. Подпись", val("f1")], ["1. Адрес", val("f2")], ["1. Телефон", val("f3")], ["1. WhatsApp", val("f4")], ["1. График", val("f5")],
       ["2. Образование", val("f6")], ["2. Стаж", val("f7")], ["2. Фишка", val("f8")], ["2. Цифра для доверия", val("f9")],
       ["3. Языки", val("f10")], ["3. Ученики", group("students")], ["3. Экзамены", group("exams")], ["3. Формат", group("format")], ["3. Длительность", val("f11")],
       ["4. Языки перевода", val("f12")], ["4. Документы", group("trans_docs")], ["4. Нотариат", group("notary")], ["4. Шаги заказа", val("f13")], ["4. Что прислать для цены", val("f14")],
-      ["5. Цена урока", val("f15")], ["5. Цена перевода", val("f16")], ["5. Предоплата", group("prepayment")], ["5. Как заказывают", group("booking")],
+      ["5. Цена урока", val("f15")], ["5. Цена перевода", val("f16")], ["5. Предоплата", group("prepayment")],
       ["6. Отзывы", val("f17")], ["6. FAQ", val("f18")],
-      ["7. Название сайта", val("f19")], ["7. Первый экран", group("first_screen")], ["7. Цвета", group("colors")], ["7. Примеры сайтов", val("f20")], ["7. Фото", group("photos_ready")]
+      ["7. Название сайта", val("f19")], ["7. Первый экран", group("first_screen")], ["7. Цвета", group("colors")], ["7. Примеры сайтов", val("f20")], ["7. Фото", group("photos_ready")],
+      ["8. Дополнительно", val("f21")]
     ];
   }
 
