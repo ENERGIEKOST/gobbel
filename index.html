@@ -7,11 +7,13 @@
 <style>
   :root {
     --ink: #24303e;
-    --muted: #6b7683;
+    --muted: #5c6773;
     --accent: #b0562f;
     --accent-dark: #8f4423;
+    --accent-soft: rgba(176, 86, 47, 0.12);
     --line: #e6e0d6;
     --paper: #fffdf8;
+    --bg: #f6f1e7;
     --ok: #2e7d4f;
     --err: #c0392b;
   }
@@ -19,14 +21,14 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: Georgia, "Times New Roman", serif;
-    background: #f6f1e7; color: var(--ink); line-height: 1.65; font-size: 16px;
+    background: var(--bg); color: var(--ink); line-height: 1.65; font-size: 16px;
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 20px 16px 60px; }
 
   .top { padding: 44px 8px 20px; text-align: center; }
   .top .kicker { font-family: Arial, Helvetica, sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); }
   .top h1 { font-size: 32px; font-weight: normal; margin: 8px 0 10px; }
-  .top p { color: var(--muted); max-width: 480px; margin: 0 auto; }
+  .top p { color: var(--muted); max-width: 500px; margin: 0 auto; }
 
   .progress { margin: 26px auto 0; max-width: 420px; }
   .progress .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
@@ -39,13 +41,14 @@
   .card .sub { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
 
   .q { margin-bottom: 20px; }
-  .q label.qtext { display: block; font-size: 16px; margin-bottom: 7px; }
+  .q label.qtext, .q .qtext { display: block; font-size: 16px; margin-bottom: 7px; }
   .q .hint { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 7px; }
   input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea {
     width: 100%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 6px;
     font-family: Georgia, serif; font-size: 16px; color: var(--ink); background: #fff;
+    transition: border-color .15s, box-shadow .15s;
   }
-  input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(176,86,47,.12); }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
   textarea { min-height: 84px; resize: vertical; }
   .field-wrap.error input, .field-wrap.error textarea { border-color: var(--err); background: #fdf3f1; }
   .err-text { display: none; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--err); margin-top: 5px; }
@@ -57,31 +60,164 @@
     font-family: Arial, Helvetica, sans-serif; font-size: 14px; cursor: pointer;
     display: inline-flex; align-items: center; gap: 7px;
     border: 1px solid var(--line); border-radius: 24px; padding: 7px 14px; background: #fff; user-select: none;
+    transition: border-color .15s, background-color .15s;
   }
+  .checks label:hover { border-color: var(--accent); }
   .checks label.on { border-color: var(--accent); background: #f9ece4; }
   .checks input { accent-color: var(--accent); }
 
-  .actions { text-align: center; padding-top: 8px; }
-  .actions .hint2 { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: var(--muted); margin-bottom: 12px; }
-  .btn {
-    font-family: Arial, Helvetica, sans-serif; display: inline-block; width: 100%; max-width: 360px;
-    margin: 6px 0; padding: 15px 18px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; text-decoration: none;
+  /* ==== Блок действий и кнопки ==== */
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    padding-top: 22px;
   }
-  .btn-main { background: var(--accent); color: #fff; font-weight: bold; }
-  .btn-main:hover { background: var(--accent-dark); }
-  .btn-alt { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
-  .btn-alt:hover { background: #efe8db; }
-  .btn-quiet { background: none; color: var(--muted); font-size: 14px; text-decoration: underline; padding: 8px; }
-  #msg { font-family: Arial, Helvetica, sans-serif; display: none; margin-top: 12px; font-size: 14px; font-weight: bold; }
-  #msg.ok { color: var(--ok); } #msg.bad { color: var(--err); }
+  .actions-alt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 20px 16px;
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    background: rgba(255, 253, 248, 0.6);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .hint2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 380px;
+    margin: 0 auto;
+    text-align: center;
+  }
 
-  footer { text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); padding: 10px 0 20px; }
+  .btn {
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 360px;
+    min-height: 50px;
+    padding: 13px 20px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .05s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .btn:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+  .btn:active:not(:disabled) { transform: translateY(1px); }
+  .btn:disabled { cursor: not-allowed; opacity: .7; transform: none; }
+
+  .btn-main {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(36, 48, 62, 0.08), 0 2px 8px rgba(176, 86, 47, 0.20);
+  }
+  .btn-main:hover:not(:disabled) { background: var(--accent-dark); }
+  .btn-main:active:not(:disabled) { box-shadow: 0 1px 2px rgba(36, 48, 62, 0.10); }
+
+  .btn-alt {
+    background: #fff;
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .btn-alt:hover:not(:disabled) { border-color: var(--ink); background: var(--paper); }
+
+  /* Загрузка: спиннер поверх текста */
+  .btn.is-loading { color: transparent !important; pointer-events: none; }
+  .btn.is-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 20px; height: 20px;
+    margin: -10px 0 0 -10px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    animation: btn-spin .7s linear infinite;
+  }
+  .btn-alt.is-loading::after {
+    border-color: rgba(36, 48, 62, 0.25);
+    border-top-color: var(--ink);
+  }
+  @keyframes btn-spin { to { transform: rotate(360deg); } }
+
+  /* «Тихие» действия — ссылки в одну строку */
+  .actions-quiet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2px 6px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .btn-link {
+    background: none;
+    border: 0;
+    padding: 8px 10px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: color .15s ease, background-color .15s ease;
+  }
+  .btn-link:hover { color: var(--ink); background: rgba(36, 48, 62, 0.05); }
+  .btn-link:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
+  .actions-quiet .dot { color: var(--line); user-select: none; }
+
+  .phone-field {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .phone-field input { text-align: center; }
+
+  #msg {
+    font-family: Arial, Helvetica, sans-serif;
+    display: none;
+    margin: 0 auto;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    max-width: 480px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  #msg.ok { color: var(--ok); background: rgba(46, 125, 79, 0.08); border: 1px solid rgba(46, 125, 79, 0.2); }
+  #msg.bad { color: var(--err); background: rgba(192, 57, 43, 0.06); border: 1px solid rgba(192, 57, 43, 0.2); }
+  #msg.visible { display: block; }
+
+  footer { text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); padding: 24px 0 20px; max-width: 480px; margin: 0 auto; }
+
   @media (max-width: 520px) {
     .top h1 { font-size: 25px; } .top { padding-top: 30px; }
     .card { padding: 20px 16px; }
     .checks label { width: 100%; }
+    .actions-quiet { flex-direction: column; gap: 0; }
+    .actions-quiet .dot { display: none; }
   }
-  @media print { .actions, .btn { display: none; } }
+  @media print { .actions, .btn, .actions-quiet, .actions-alt { display: none; } }
 </style>
 </head>
 <body>
@@ -90,45 +226,45 @@
   <div class="top">
     <div class="kicker">Анкета</div>
     <h1>Ответы для вашего сайта</h1>
-    <p>Заполните спокойной и без спешки. Черновик сохраняется сам — можно вернуться позже. Готово — жмите кнопку внизу.</p>
+    <p>Заполните анкету — это займёт около 15 минут. Ответы сохраняются автоматически: можно закрыть страницу и продолжить позже. По завершении нажмите кнопку внизу.</p>
     <div class="progress">
-      <div class="bar"><div class="fill" id="pfill"></div></div>
+      <div class="bar" id="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Прогресс заполнения анкеты"><div class="fill" id="pfill"></div></div>
       <div class="label" id="plabel">Заполнено 0%</div>
-      <div class="saved-note" id="savednote"></div>
+      <div class="saved-note" id="savednote" aria-live="polite"></div>
     </div>
   </div>
 
   <form id="anketa" novalidate>
 
   <div class="card">
-    <h2>1. Самое главное</h2>
-    <div class="sub">Это попадёт на главную страницу сайта.</div>
-    <div class="q field-wrap"><label class="qtext">Название центра <span class="req-mark">*</span></label>
-      <input type="text" id="f1" placeholder="Например: Языковой центр «Мир»"><div class="err-text">Напишите название — без него не обойтись.</div></div>
-    <div class="q field-wrap"><label class="qtext">Ваше имя и фамилия (как показывать на сайте) <span class="req-mark">*</span></label>
-      <input type="text" id="f2" placeholder="Например: Марина Иванова"><div class="err-text">Напишите, как вас представлять посетителям.</div></div>
-    <div class="q field-wrap"><label class="qtext">Сколько лет преподаёте <span class="req-mark">*</span></label>
-      <input type="text" id="f3" placeholder="Например: 20 лет"><div class="err-text">Укажите стаж хотя бы примерно.</div></div>
-    <div class="q"><label class="qtext">Текст «Обо мне» — 3–5 предложений</label>
-      <textarea id="f4" placeholder="Расскажите о себе: как учите, с чем помогаете, что любите в работе"></textarea>
-      <div class="hint">Не страшно, если выйдет коряво — на сайте текст отшлифуем.</div></div>
-    <div class="q"><label class="qtext">Город и адрес занятий</label>
+    <h2>1. Основные сведения</h2>
+    <div class="sub">Будет размещено на главной странице сайта.</div>
+    <div class="q field-wrap"><label class="qtext" for="f1">Название центра <span class="req-mark">*</span></label>
+      <input type="text" id="f1" placeholder="Например: Языковой центр «Мир»" aria-describedby="err-f1"><div class="err-text" id="err-f1" aria-live="polite">Укажите название центра.</div></div>
+    <div class="q field-wrap"><label class="qtext" for="f2">Имя и фамилия для подписи на сайте <span class="req-mark">*</span></label>
+      <input type="text" id="f2" placeholder="Например: Марина Иванова" autocomplete="name" aria-describedby="err-f2"><div class="err-text" id="err-f2" aria-live="polite">Укажите, как вас представлять посетителям.</div></div>
+    <div class="q field-wrap"><label class="qtext" for="f3">Стаж преподавания <span class="req-mark">*</span></label>
+      <input type="text" id="f3" placeholder="Например: 20 лет" aria-describedby="err-f3"><div class="err-text" id="err-f3" aria-live="polite">Укажите стаж (можно примерно).</div></div>
+    <div class="q"><label class="qtext" for="f4">О себе — 3–5 предложений</label>
+      <textarea id="f4" placeholder="Например: специализация, методика, с какими задачами работаете"></textarea>
+      <div class="hint">Допускается краткая форма — формулировки будут доработаны при подготовке сайта.</div></div>
+    <div class="q"><label class="qtext" for="f5">Адрес проведения занятий (город, улица)</label>
       <input type="text" id="f5" placeholder="Например: Батайск, ул. Коммунистическая, 205"></div>
   </div>
 
   <div class="card">
-    <h2>2. Опыт и образование</h2>
-    <div class="sub">Залог доверия: посетители сайта это читают первыми.</div>
-    <div class="q"><label class="qtext">Образование (вуз, специальность, год)</label><input type="text" id="f6"></div>
-    <div class="q"><label class="qtext">Сертификаты (IELTS, TOEFL, Cambridge и т.д.)</label><textarea id="f7"></textarea></div>
-    <div class="q"><label class="qtext">Жили или учились ли за границей</label><input type="text" id="f8" placeholder="Например: проходила стажировку в Лондоне"></div>
-    <div class="q"><label class="qtext">Чем ваш подход отличается от других</label><textarea id="f9"></textarea></div>
+    <h2>2. Образование и опыт</h2>
+    <div class="sub">Этот раздел посетители читают в первую очередь.</div>
+    <div class="q"><label class="qtext" for="f6">Образование: вуз, специальность, год окончания</label><input type="text" id="f6"></div>
+    <div class="q"><label class="qtext" for="f7">Сертификаты (IELTS, TOEFL, Cambridge и другие)</label><textarea id="f7"></textarea></div>
+    <div class="q"><label class="qtext" for="f8">Обучение или проживание за границей</label><input type="text" id="f8" placeholder="Например: стажировка в Лондоне, полгода в США"></div>
+    <div class="q"><label class="qtext" for="f9">Отличия вашей методики от других</label><textarea id="f9"></textarea></div>
   </div>
 
   <div class="card">
-    <h2>3. Услуги</h2>
-    <div class="sub">Отметьте всё, чем занимаетесь, — галочки собираются сами.</div>
-    <div class="q checks" id="svc-list">
+    <h2>3. Направления работы</h2>
+    <div class="sub">Отметьте все подходящие варианты.</div>
+    <div class="q checks" id="svc-list" role="group" aria-label="Направления работы">
       <label><input type="checkbox" class="svc" value="Английский детям"><span>Английский детям</span></label>
       <label><input type="checkbox" class="svc" value="Школьники 1–4 класс"><span>Школьники 1–4 класс</span></label>
       <label><input type="checkbox" class="svc" value="Школьники 5–8 класс"><span>Школьники 5–8 класс</span></label>
@@ -142,10 +278,10 @@
       <label><input type="checkbox" class="svc" value="Переводы документов"><span>Переводы документов</span></label>
       <label><input type="checkbox" class="svc" value="Онлайн-занятия"><span>Онлайн-занятия</span></label>
     </div>
-    <div class="q"><label class="qtext">Какие переводы делаете и почём</label>
+    <div class="q"><label class="qtext" for="f10">Переводы: виды и стоимость</label>
       <textarea id="f10" placeholder="Например: паспорт — 1000 ₽, страница технического текста — от 500 ₽"></textarea></div>
-    <div class="q"><label class="qtext">Пробное занятие</label>
-      <div class="checks">
+    <div class="q"><div class="qtext" id="lbl-trial">Пробное занятие</div>
+      <div class="checks" role="group" aria-labelledby="lbl-trial">
         <label><input type="radio" name="trial" value="Да, бесплатное"><span>Да, бесплатное</span></label>
         <label><input type="radio" name="trial" value="Да, платное"><span>Да, платное</span></label>
         <label><input type="radio" name="trial" value="Нет"><span>Нет</span></label>
@@ -154,14 +290,14 @@
 
   <div class="card">
     <h2>4. Цены и расписание</h2>
-    <div class="sub">Если точных цен нет — напишите диапазон «от … до …».</div>
-    <div class="q"><label class="qtext">Стоимость по программам</label>
+    <div class="sub">При отсутствии точных цен укажите диапазон — «от … до …».</div>
+    <div class="q"><label class="qtext" for="f11">Стоимость занятий</label>
       <textarea id="f11" placeholder="Например: дети — 500 ₽/час, подготовка к ЕГЭ — 800 ₽/час"></textarea></div>
-    <div class="q"><label class="qtext">Абонементы, скидки, рассрочка</label><textarea id="f12"></textarea></div>
-    <div class="q"><label class="qtext">Дни и часы занятий</label>
+    <div class="q"><label class="qtext" for="f12">Абонементы, скидки, рассрочка</label><textarea id="f12"></textarea></div>
+    <div class="q"><label class="qtext" for="f13">Расписание занятий</label>
       <input type="text" id="f13" placeholder="Например: пн–пт 10:00–19:00, сб по договорённости"></div>
-    <div class="q"><label class="qtext">Формат занятий</label>
-      <div class="checks">
+    <div class="q"><div class="qtext" id="lbl-format">Формат занятий</div>
+      <div class="checks" role="group" aria-labelledby="lbl-format">
         <label><input type="radio" name="format" value="Только очно"><span>Только очно</span></label>
         <label><input type="radio" name="format" value="Только онлайн"><span>Только онлайн</span></label>
         <label><input type="radio" name="format" value="Очно и онлайн"><span>Очно и онлайн</span></label>
@@ -170,34 +306,34 @@
 
   <div class="card">
     <h2>5. Результаты и отзывы</h2>
-    <div class="sub">Имена в отзывах можно сократить до первого имени.</div>
-    <div class="q"><label class="qtext">Достижения учеников</label>
+    <div class="sub">Достаточно указать имя — фамилии в отзывах не обязательны.</div>
+    <div class="q"><label class="qtext" for="f14">Достижения учеников</label>
       <textarea id="f14" placeholder="Например: ЕГЭ — 92 балла у Алины, ученик поступил в ЮФУ"></textarea></div>
-    <div class="q"><label class="qtext">Отзыв 1 — имя и текст</label><textarea id="f15"></textarea></div>
-    <div class="q"><label class="qtext">Отзыв 2 — имя и текст</label><textarea id="f16"></textarea></div>
-    <div class="q"><label class="qtext">Отзыв 3 — имя и текст</label><textarea id="f17"></textarea></div>
-    <div class="q"><label class="qtext">Сколько всего учеников было за все годы (примерно)</label>
+    <div class="q"><label class="qtext" for="f15">Отзыв 1: имя и текст</label><textarea id="f15"></textarea></div>
+    <div class="q"><label class="qtext" for="f16">Отзыв 2: имя и текст</label><textarea id="f16"></textarea></div>
+    <div class="q"><label class="qtext" for="f17">Отзыв 3: имя и текст</label><textarea id="f17"></textarea></div>
+    <div class="q"><label class="qtext" for="f18">Общее количество учеников (примерно)</label>
       <input type="text" id="f18" placeholder="Например: более 300"></div>
   </div>
 
   <div class="card">
-    <h2>6. Контакты</h2>
-    <div class="sub">Всё, что попадёт в подвал сайта и кнопки связи.</div>
-    <div class="q field-wrap"><label class="qtext">Телефон для сайта <span class="req-mark">*</span></label>
-      <input type="tel" id="f19" placeholder="+7 928 000-00-00"><div class="err-text">Введите телефон в формате +7 или 8, 11 цифр.</div></div>
-    <div class="q"><label class="qtext">WhatsApp / Telegram</label><input type="text" id="f20" placeholder="Номер или @ник"></div>
-    <div class="q field-wrap"><label class="qtext">Электронная почта</label>
-      <input type="email" id="f21" placeholder="pochta@example.ru"><div class="err-text">Похоже на опечатку: в почте должен быть знак @ и точка после него.</div></div>
-    <div class="q field-wrap"><label class="qtext">Ссылки на соцсети</label>
-      <input type="url" id="f22" placeholder="https://vk.com/..."><div class="err-text">Ссылка должна начинаться с http:// или https://</div></div>
-    <div class="q"><label class="qtext">Когда можно звонить и писать</label>
+    <h2>6. Контактные данные</h2>
+    <div class="sub">Будет размещено в подвале сайта и на кнопках связи.</div>
+    <div class="q field-wrap"><label class="qtext" for="f19">Телефон для сайта <span class="req-mark">*</span></label>
+      <input type="tel" id="f19" placeholder="+7 928 000-00-00" autocomplete="tel" aria-describedby="err-f19"><div class="err-text" id="err-f19" aria-live="polite">Введите телефон в формате +7 или 8, 11 цифр.</div></div>
+    <div class="q"><label class="qtext" for="f20">WhatsApp или Telegram</label><input type="text" id="f20" placeholder="Номер или @ник"></div>
+    <div class="q field-wrap"><label class="qtext" for="f21">Электронная почта</label>
+      <input type="email" id="f21" placeholder="pochta@example.ru" autocomplete="email" aria-describedby="err-f21"><div class="err-text" id="err-f21" aria-live="polite">Проверьте адрес: должны быть знак @ и точка после него.</div></div>
+    <div class="q field-wrap"><label class="qtext" for="f22">Ссылка на соцсети</label>
+      <input type="url" id="f22" placeholder="https://vk.com/..." autocomplete="url" aria-describedby="err-f22"><div class="err-text" id="err-f22" aria-live="polite">Проверьте ссылку. Допускается без https:// — добавим автоматически.</div></div>
+    <div class="q"><label class="qtext" for="f23">Удобное время для звонков и сообщений</label>
       <input type="text" id="f23" placeholder="Например: ежедневно с 9:00 до 21:00"></div>
   </div>
 
   <div class="card">
-    <h2>7. Материалы</h2>
-    <div class="sub">Фото в форму не вставляются — их нужно прислать файлами в переписке.</div>
-    <div class="q checks" id="photo-list">
+    <h2>7. Фотографии и материалы</h2>
+    <div class="sub">Фотографии в анкету не добавляются — отправьте их отдельно в мессенджер или на почту.</div>
+    <div class="q checks" id="photo-list" role="group" aria-label="Фотографии и материалы">
       <label><input type="checkbox" class="photos" value="Моё фото"><span>Моё фото</span></label>
       <label><input type="checkbox" class="photos" value="Фото кабинета"><span>Фото кабинета</span></label>
       <label><input type="checkbox" class="photos" value="Логотип"><span>Логотип</span></label>
@@ -206,89 +342,108 @@
   </div>
 
   <div class="card">
-    <h2>8. Внешний вид сайта</h2>
-    <div class="sub">Чтобы не гадать, что вам нравится.</div>
-    <div class="q"><label class="qtext">Какой стиль ближе</label>
-      <div class="checks">
+    <h2>8. Оформление сайта</h2>
+    <div class="sub">Укажите ваши предпочтения.</div>
+    <div class="q"><div class="qtext" id="lbl-style">Предпочтительный стиль</div>
+      <div class="checks" role="group" aria-labelledby="lbl-style">
         <label><input type="radio" name="style" value="Тёплый и спокойный"><span>Тёплый и спокойный</span></label>
         <label><input type="radio" name="style" value="Строгий и деловой"><span>Строгий и деловой</span></label>
         <label><input type="radio" name="style" value="Яркий и современный"><span>Яркий и современный</span></label>
       </div></div>
-    <div class="q"><label class="qtext">Любимые цвета или пример сайта</label><input type="text" id="f24" placeholder="Например: тёплый бежевый; или ссылку на чей-то сайт"></div>
-    <div class="q"><label class="qtext">Что обязательно должно быть на сайте</label><textarea id="f25"></textarea></div>
+    <div class="q"><label class="qtext" for="f24">Предпочтительные цвета или пример сайта</label><input type="text" id="f24" placeholder="Например: тёплый бежевый; или ссылка на пример"></div>
+    <div class="q"><label class="qtext" for="f25">Обязательные элементы на сайте</label><textarea id="f25"></textarea></div>
   </div>
 
   <div class="card">
-    <h2>9. Частые вопросы клиентов</h2>
-    <div class="sub">Вспомните, что спрашивают по телефону — это будущий блок «Вопросы и ответы».</div>
-    <div class="q"><label class="qtext">Вопрос и ваш ответ</label>
-      <textarea id="f26" style="min-height:140px;" placeholder="Вопрос: заниматься будут в группе?&#10;Ответ: нет, только индивидуально.&#10;&#10;Вопрос: ...&#10;Ответ: ..."></textarea></div>
+    <h2>9. Частые вопросы</h2>
+    <div class="sub">На основе этих ответов будет создан раздел «Вопросы и ответы». Укажите, что чаще всего спрашивают по телефону.</div>
+    <div class="q"><label class="qtext" for="f26">Вопрос и ответ. Каждую следующую пару начинайте с новой строки</label>
+      <textarea id="f26" style="min-height:140px;" placeholder="Вопрос: занятия проходят в группе?&#10;Ответ: нет, только индивидуально.&#10;&#10;Вопрос: ...&#10;Ответ: ..."></textarea></div>
   </div>
 
   </form>
 
   <div class="actions">
-    <p class="hint2">Номер получателя анкеты — в формате 7XXXXXXXXXX, без скобок и пробелов <span class="req-mark">*</span></p>
-    <div style="max-width:360px; margin: 0 auto 12px;" class="field-wrap">
-      <input type="tel" id="phone" placeholder="79001234567" style="text-align:center;">
-      <div class="err-text">Введите 11 цифр номера, начиная с 7.</div>
+    <button type="button" class="btn btn-main" id="btn-email" onclick="sendEmail()">Отправить на почту</button>
+
+    <div class="actions-alt">
+      <button type="button" class="btn btn-alt" id="btn-wa" onclick="sendWA()">Отправить в WhatsApp</button>
+      <p class="hint2">Для отправки в WhatsApp укажите номер получателя — 11 цифр, начиная с 7.</p>
+      <div id="phone-wrap" class="field-wrap phone-field">
+        <input type="tel" id="phone" placeholder="79001234567" autocomplete="tel" aria-label="Номер WhatsApp для отправки анкеты" aria-describedby="err-phone">
+        <div class="err-text" id="err-phone" aria-live="polite">Введите 11 цифр номера, начиная с 7.</div>
+      </div>
     </div>
-    <button type="button" class="btn btn-main" onclick="sendWA()">Отправить ответы в WhatsApp</button>
-    <br>
-    <button type="button" class="btn btn-alt" onclick="copyAnswers()">Скопировать все ответы</button>
-    <br>
-    <button type="button" class="btn-quiet" onclick="downloadFile()">Скачать ответы файлом</button>
-    <br>
-    <button type="button" class="btn-quiet" onclick="clearDraft()">Стереть черновик</button>
-    <div id="msg"></div>
+
+    <div class="actions-quiet">
+      <button type="button" class="btn-link" onclick="copyAnswers()">Скопировать ответы</button>
+      <span class="dot" aria-hidden="true">·</span>
+      <button type="button" class="btn-link" onclick="downloadFile()">Скачать файлом</button>
+      <span class="dot" aria-hidden="true">·</span>
+      <button type="button" class="btn-link" onclick="clearDraft()">Удалить черновик</button>
+    </div>
+
+    <div id="msg" role="status" aria-live="polite"></div>
   </div>
 
-  <footer>Черновик хранится только в этом браузере и никуда не отправляется сам.</footer>
+  <footer>Черновик хранится в этом браузере и не передаётся никуда, пока вы не нажмёте «Отправить».</footer>
 </div>
 
 <script>
 (function () {
   "use strict";
-  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20","f21","f22","f23","f24","f25","f26"];
-  var KEY = "anketa_draft_v2";
+  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20","f21","f22","f23","f24","f25","f26","phone"];
+  var KEY = "anketa_draft_v5";
+  var EMAIL_TO = "byshkin.konstantin@mail.ru";
 
   function $(id) { return document.getElementById(id); }
 
-  /* --- сохранение черновика --- */
+  function boxKey(b) {
+    return (b.name || b.className || b.type) + "|" + b.value;
+  }
+
+  /* ---------- черновик ---------- */
+  var savedShowTimer = null, savedHideTimer = null;
   function saveDraft() {
     var data = {}, i, boxes;
     for (i = 0; i < FIELDS.length; i++) data[FIELDS[i]] = $(FIELDS[i]).value;
     boxes = document.querySelectorAll("input[type=checkbox], input[type=radio]");
     data._checks = [];
-    for (i = 0; i < boxes.length; i++) data._checks.push(boxes[i].checked ? 1 : 0);
+    for (i = 0; i < boxes.length; i++) if (boxes[i].checked) data._checks.push(boxKey(boxes[i]));
     try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
-    showSaved();
+    scheduleSavedNote();
     updateProgress();
   }
   function loadDraft() {
-    var data, i, boxes;
+    var data, i, boxes, set = {};
     try { data = JSON.parse(localStorage.getItem(KEY)); } catch (e) { return; }
     if (!data) return;
-    for (i = 0; i < FIELDS.length; i++) { if (data[FIELDS[i]]) $(FIELDS[i]).value = data[FIELDS[i]]; }
+    for (i = 0; i < FIELDS.length; i++) {
+      if (data[FIELDS[i]] != null && $(FIELDS[i])) $(FIELDS[i]).value = data[FIELDS[i]];
+    }
+    if (data._checks && data._checks.length) {
+      for (i = 0; i < data._checks.length; i++) set[data._checks[i]] = 1;
+    }
     boxes = document.querySelectorAll("input[type=checkbox], input[type=radio]");
-    for (i = 0; i < boxes.length; i++) { if (data._checks && data._checks[i]) boxes[i].checked = true; }
+    for (i = 0; i < boxes.length; i++) boxes[i].checked = !!set[boxKey(boxes[i])];
     syncPills();
-    updateProgress();
   }
   function clearDraft() {
-    if (!confirm("Стереть все заполненные ответы? Это нельзя отменить.")) return;
+    if (!confirm("Удалить все ответы? Действие нельзя отменить.")) return;
     try { localStorage.removeItem(KEY); } catch (e) {}
     location.reload();
   }
-  var savedTimer = null;
-  function showSaved() {
-    var n = $("savednote");
-    n.textContent = "Черновик сохранён";
-    clearTimeout(savedTimer);
-    savedTimer = setTimeout(function () { n.textContent = ""; }, 2000);
+  function scheduleSavedNote() {
+    clearTimeout(savedShowTimer);
+    savedShowTimer = setTimeout(function () {
+      var n = $("savednote");
+      if (!n) return;
+      n.textContent = "Черновик сохранён";
+      clearTimeout(savedHideTimer);
+      savedHideTimer = setTimeout(function () { n.textContent = ""; }, 2000);
+    }, 400);
   }
 
-  /* --- подсветка выбранных галочек --- */
   function syncPills() {
     var labels = document.querySelectorAll(".checks label");
     for (var i = 0; i < labels.length; i++) {
@@ -297,7 +452,7 @@
     }
   }
 
-  /* --- прогресс --- */
+  /* ---------- прогресс ---------- */
   function updateProgress() {
     var filled = 0, i;
     var meaningful = ["f1","f2","f3","f4","f5","f6","f7","f9","f11","f13","f14","f15","f19","f20","f23","f24","f25","f26"];
@@ -311,24 +466,42 @@
     var pct = Math.min(100, Math.round(filled / total * 100));
     $("pfill").style.width = pct + "%";
     $("plabel").textContent = "Заполнено " + pct + "%";
+    var pb = $("pbar");
+    if (pb) pb.setAttribute("aria-valuenow", String(pct));
   }
 
-  /* --- валидация --- */
-  function isPhoneOk(v) { return /^(\+?7|8)\d{10}$/.test(v.replace(/[^0-9+]/g, "")); }
+  /* ---------- валидация ---------- */
+  function normalizePhone(v) {
+    var d = v.replace(/\D/g, "");
+    if (d.length === 11 && d.charAt(0) === "8") d = "7" + d.slice(1);
+    return d;
+  }
+  function isPhoneOk(v) {
+    var d = normalizePhone(v);
+    return d.length === 11 && d.charAt(0) === "7";
+  }
   function isEmailOk(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
-  function isUrlOk(v) { return /^https?:\/\/\S+\.\S+/i.test(v); }
+  function normalizeUrl(v) {
+    v = v.trim();
+    if (!v) return v;
+    if (!/^https?:\/\//i.test(v)) v = "https://" + v.replace(/^\/+/, "");
+    return v;
+  }
+  function isUrlOk(v) { return /^https?:\/\/\S+\.\S+/i.test(v.trim()); }
 
   function markError(id, bad) {
-    var w = $(id).parentNode;
-    if (w.className.indexOf("field-wrap") === -1) return;
+    var el = $(id);
+    if (!el) return;
+    var w = el.parentNode;
+    if (!w || w.className.indexOf("field-wrap") === -1) return;
     if (bad) w.className = w.className.replace(/\s*error/g, "") + " error";
     else w.className = w.className.replace(/\s*error/g, "");
+    el.setAttribute("aria-invalid", bad ? "true" : "false");
   }
 
-  function validate(showScroll) {
-    var firstBad = null, v, bad;
+  function validateForm(showScroll) {
+    var firstBad = null, v, i, fixed;
     var required = ["f1","f2","f3","f19"];
-    var i;
     for (i = 0; i < required.length; i++) {
       v = $(required[i]).value.trim();
       markError(required[i], !v);
@@ -339,95 +512,182 @@
     v = $("f21").value.trim();
     if (v && !isEmailOk(v)) { markError("f21", true); if (!firstBad) firstBad = "f21"; }
     v = $("f22").value.trim();
-    if (v && !isUrlOk(v)) { markError("f22", true); if (!firstBad) firstBad = "f22"; }
-    v = $("phone").value.trim();
-    if (!isPhoneOk(v)) { markError("phone", true); if (!firstBad) firstBad = "phone"; }
+    if (v && !isUrlOk(v)) {
+      fixed = normalizeUrl(v);
+      if (isUrlOk(fixed)) { $("f22").value = fixed; }
+      else { markError("f22", true); if (!firstBad) firstBad = "f22"; }
+    }
     if (firstBad && showScroll) {
-      $(firstBad).scrollIntoView({ behavior: "smooth", block: "center" });
-      $(firstBad).focus();
+      var el = $(firstBad);
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.focus();
     }
     return !firstBad;
   }
 
-  /* --- сбор текста --- */
-  function collect() {
+  function validateTarget(showScroll) {
+    var v = $("phone").value.trim();
+    var ok = isPhoneOk(v);
+    markError("phone", !ok);
+    if (!ok && showScroll) {
+      $("phone").scrollIntoView({ behavior: "smooth", block: "center" });
+      $("phone").focus();
+    }
+    return ok;
+  }
+
+  /* ---------- сбор данных ---------- */
+  function collectPairs() {
     function val(id) { var v = $(id).value.trim(); return v || "—"; }
     function group(sel) {
       var arr = document.querySelectorAll(sel), res = [], i;
       for (i = 0; i < arr.length; i++) if (arr[i].checked) res.push(arr[i].value);
       return res.length ? res.join(", ") : "—";
     }
-    var lines = [
+    return [
       ["Название центра", val("f1")], ["Имя и фамилия", val("f2")], ["Стаж", val("f3")],
-      ["Обо мне", val("f4")], ["Адрес занятий", val("f5")], ["Образование", val("f6")],
+      ["О себе", val("f4")], ["Адрес занятий", val("f5")], ["Образование", val("f6")],
       ["Сертификаты", val("f7")], ["За границей", val("f8")], ["Методика", val("f9")],
-      ["Услуги", group(".svc")], ["Переводы и цены", val("f10")],
+      ["Направления", group(".svc")], ["Переводы и стоимость", val("f10")],
       ["Пробное занятие", group("input[name=trial]")],
-      ["Цены", val("f11")], ["Абонементы", val("f12")], ["Расписание", val("f13")],
+      ["Стоимость", val("f11")], ["Абонементы", val("f12")], ["Расписание", val("f13")],
       ["Формат занятий", group("input[name=format]")],
       ["Достижения учеников", val("f14")], ["Отзыв 1", val("f15")], ["Отзыв 2", val("f16")],
       ["Отзыв 3", val("f17")], ["Всего учеников", val("f18")],
       ["Телефон", val("f19")], ["WhatsApp / Telegram", val("f20")], ["Почта", val("f21")],
-      ["Соцсети", val("f22")], ["Когда можно звонить", val("f23")],
-      ["Фото пришлёт", group(".photos")],
+      ["Соцсети", val("f22")], ["Время для связи", val("f23")],
+      ["Материалы", group(".photos")],
       ["Стиль сайта", group("input[name=style]")], ["Цвета / пример", val("f24")],
-      ["Обязательно на сайте", val("f25")], ["FAQ", val("f26")]
+      ["Обязательные элементы", val("f25")], ["FAQ", val("f26")]
     ];
+  }
+  function collect() {
+    var lines = collectPairs();
     var out = "Анкета для сайта:\n";
     for (var i = 0; i < lines.length; i++) out += (i + 1) + ". " + lines[i][0] + ": " + lines[i][1] + "\n";
     return out;
   }
+  function buildPayload() {
+    var pairs = collectPairs();
+    var p = {
+      _subject: "Анкета для сайта — " + ($("f1").value.trim() || "без названия"),
+      _template: "table",
+      _captcha: "false",
+      _url: window.location.href
+    };
+    for (var i = 0; i < pairs.length; i++) p[pairs[i][0]] = pairs[i][1];
+    var em = $("f21").value.trim();
+    if (em && isEmailOk(em)) p._replyto = em;
+    return p;
+  }
 
-  function show(text, ok) {
+  function show(text, ok, ms) {
     var m = $("msg");
-    m.textContent = text; m.className = ok ? "ok" : "bad"; m.style.display = "block";
+    m.textContent = text;
+    m.className = (ok ? "ok" : "bad") + " visible";
     clearTimeout(m._t);
-    m._t = setTimeout(function () { m.style.display = "none"; }, 4000);
+    m._t = setTimeout(function () { m.className = ok ? "ok" : "bad"; }, ms || 8000);
   }
 
-  /* --- действия --- */
-  function sendWA() {
-    if (!validate(true)) { show("Проверьте поля, подсвеченные красным.", false); return; }
-    var p = $("phone").value.replace(/[^0-9]/g, "");
-    window.location.href = "https://wa.me/" + p + "?text=" + encodeURIComponent(collect());
+  function setLoading(btn, on) {
+    if (!btn) return;
+    btn.disabled = on;
+    if (on) btn.classList.add("is-loading");
+    else btn.classList.remove("is-loading");
   }
+
+  /* ---------- отправка на почту ---------- */
+  function sendEmail() {
+    if (!validateForm(true)) { show("Проверьте подсвеченные поля.", false); return; }
+    var btn = $("btn-email");
+    setLoading(btn, true);
+
+    fetch("https://formsubmit.co/ajax/" + EMAIL_TO, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(buildPayload())
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      setLoading(btn, false);
+      var ok = data && (data.success === true || data.success === "true");
+      if (ok) {
+        show("Анкета отправлена. При первой отправке сервис направит на указанный адрес письмо для подтверждения — перейдите по ссылке в нём. Последующие отправки будут приходить сразу.", true, 12000);
+      } else {
+        console.error("FormSubmit response:", data);
+        show("Не удалось отправить. Повторите попытку или воспользуйтесь кнопкой «Скопировать ответы».", false);
+      }
+    })
+    .catch(function (err) {
+      setLoading(btn, false);
+      console.error("FormSubmit error:", err);
+      show("Нет связи с сервисом отправки. Проверьте интернет или воспользуйтесь кнопкой «Скопировать ответы».", false);
+    });
+  }
+
+  /* ---------- WhatsApp ---------- */
+  function sendWA() {
+    if (!validateForm(true)) { show("Проверьте подсвеченные поля.", false); return; }
+    if (!validateTarget(true)) { show("Проверьте номер WhatsApp.", false); return; }
+    var p = normalizePhone($("phone").value);
+    var text = collect();
+    var url = "https://wa.me/" + p + "?text=" + encodeURIComponent(text);
+    if (url.length > 3500) {
+      var ok = confirm("Текст превышает рекомендуемую длину — WhatsApp может обрезать сообщение. Продолжить?\n\nНадёжнее воспользоваться кнопкой «Скопировать ответы» и вставить текст в чат вручную.");
+      if (!ok) return;
+    }
+    window.location.href = url;
+  }
+
   function copyAnswers() {
-    if (!validate(true)) { show("Проверьте поля, подсвеченные красным.", false); return; }
+    if (!validateForm(true)) { show("Проверьте подсвеченные поля.", false); return; }
     var text = collect(), done = false;
     function fallback() {
       var ta = document.createElement("textarea");
       ta.value = text; document.body.appendChild(ta); ta.select();
-      try { document.execCommand("copy"); show("Скопировано — вставьте в чат.", true); }
-      catch (e) { show("Не удалось скопировать — используйте «Скачать ответы файлом».", false); }
+      try { document.execCommand("copy"); show("Скопировано. Вставьте в чат.", true); }
+      catch (e) { show("Не удалось скопировать. Воспользуйтесь кнопкой «Скачать файлом».", false); }
       document.body.removeChild(ta);
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () { show("Скопировано — вставьте в чат.", true); }, fallback);
+      navigator.clipboard.writeText(text).then(function () { show("Скопировано. Вставьте в чат.", true); }, fallback);
       done = true;
     }
     if (!done) fallback();
   }
+
   function downloadFile() {
-    if (!validate(true)) { show("Проверьте поля, подсвеченные красным.", false); return; }
+    if (!validateForm(true)) { show("Проверьте подсвеченные поля.", false); return; }
     var blob = new Blob([collect()], { type: "text/plain;charset=utf-8" });
     var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob); a.download = "anketa_otvety.txt";
+    var url = URL.createObjectURL(blob);
+    a.href = url; a.download = "anketa_otvety.txt";
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    show("Файл скачан.", true);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    show("Файл сохранён.", true);
   }
 
-  /* --- навешивание событий --- */
+  /* ---------- события ---------- */
   var els = document.querySelectorAll("input, textarea");
   for (var i = 0; i < els.length; i++) {
     if (els[i].type === "checkbox" || els[i].type === "radio") {
       els[i].addEventListener("change", function () { syncPills(); saveDraft(); });
     } else {
-      els[i].addEventListener("input", saveDraft);
+      els[i].addEventListener("input", function () {
+        if (this.id) markError(this.id, false);
+        saveDraft();
+      });
     }
   }
+  $("f22").addEventListener("blur", function () {
+    if (this.value.trim()) this.value = normalizeUrl(this.value);
+  });
 
-  window.sendWA = sendWA; window.copyAnswers = copyAnswers;
-  window.downloadFile = downloadFile; window.clearDraft = clearDraft;
+  window.sendEmail = sendEmail;
+  window.sendWA = sendWA;
+  window.copyAnswers = copyAnswers;
+  window.downloadFile = downloadFile;
+  window.clearDraft = clearDraft;
 
   loadDraft();
   updateProgress();
