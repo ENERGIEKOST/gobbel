@@ -6,95 +6,120 @@
 <title>Анкета для сайта</title>
 <style>
   :root {
-    --ink: #24303e;
+    --ink: #1a2530;          /* Более тёмный и контрастный текст */
     --muted: #5c6773;
     --accent: #b0562f;
     --accent-dark: #8f4423;
-    --accent-soft: rgba(176, 86, 47, 0.12);
-    --line: #e6e0d6;
-    --paper: #fffdf8;
-    --bg: #f6f1e7;
+    --accent-soft: rgba(176, 86, 47, 0.1);
+    --line: #dcd6cd;
+    --paper: #ffffff;        /* Белые карточки для лучшей читаемости */
+    --bg: #f3efe6;
     --ok: #2e7d4f;
     --err: #c0392b;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  
   body {
     font-family: Georgia, "Times New Roman", serif;
-    background: var(--bg); color: var(--ink); line-height: 1.65; font-size: 16px;
+    background: var(--bg); 
+    color: var(--ink); 
+    line-height: 1.7; 
+    font-size: 17px; /* Чуть крупнее для чтения */
   }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 20px 16px 60px; }
+  
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
 
-  .top { padding: 44px 8px 20px; text-align: center; }
-  .top .kicker { font-family: Arial, Helvetica, sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); }
-  .top h1 { font-size: 32px; font-weight: normal; margin: 8px 0 10px; }
-  .top p { color: var(--muted); max-width: 500px; margin: 0 auto; }
+  /* --- Шапка --- */
+  .top { padding: 50px 8px 24px; text-align: center; }
+  .top .kicker { font-family: Arial, Helvetica, sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: bold; }
+  .top h1 { font-size: 36px; font-weight: normal; margin: 10px 0 14px; letter-spacing: -0.5px; }
+  .top p { color: var(--muted); max-width: 540px; margin: 0 auto; font-size: 16px; }
 
-  .progress { margin: 26px auto 0; max-width: 420px; }
-  .progress .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
-  .progress .fill { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
-  .progress .label { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); margin-top: 6px; }
-  .saved-note { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--ok); margin-top: 4px; height: 18px; }
+  /* --- Прогресс --- */
+  .progress { margin: 32px auto 0; max-width: 440px; }
+  .progress .bar { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .progress .fill { height: 100%; width: 0; background: var(--accent); transition: width .4s ease; }
+  .progress .label { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); margin-top: 8px; font-weight: bold; }
+  .saved-note { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--ok); margin-top: 6px; height: 18px; }
 
-  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 26px 24px; margin: 22px 0; }
-  .card h2 { font-size: 21px; font-weight: normal; margin-bottom: 4px; }
-  .card .sub { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  /* --- Карточки разделов --- */
+  .card { 
+    background: var(--paper); 
+    border: 1px solid var(--line); 
+    border-radius: 12px; 
+    padding: 32px; 
+    margin: 24px 0; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); 
+  }
+  .card h2 { font-size: 24px; font-weight: normal; margin-bottom: 6px; color: var(--accent-dark); }
+  .card .sub { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
 
-  .q { margin-bottom: 20px; }
-  .q label.qtext, .q .qtext { display: block; font-size: 16px; margin-bottom: 7px; }
-  .q .hint { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 7px; }
+  /* --- Вопросы --- */
+  .q { margin-bottom: 28px; }
+  .q label.qtext, .q .qtext { display: block; font-size: 17px; font-weight: bold; margin-bottom: 10px; color: var(--ink); }
+  .q .hint { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  
+  /* --- Поля ввода --- */
   input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea {
-    width: 100%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 6px;
-    font-family: Georgia, serif; font-size: 16px; color: var(--ink); background: #fff;
-    transition: border-color .15s, box-shadow .15s;
+    width: 100%; padding: 14px 16px; border: 1px solid #c9c2b8; border-radius: 8px;
+    font-family: Georgia, serif; font-size: 17px; color: var(--ink); background: #faf9f7;
+    transition: all .2s ease;
+    scroll-margin-top: 40px;
   }
-  input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-  textarea { min-height: 84px; resize: vertical; }
+  input:focus, textarea:focus { 
+    outline: none; 
+    border-color: var(--accent); 
+    background: #fff; 
+    box-shadow: 0 0 0 4px var(--accent-soft); 
+  }
+  textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+  
+  /* --- Ошибки --- */
   .field-wrap.error input, .field-wrap.error textarea { border-color: var(--err); background: #fdf3f1; }
-  .err-text { display: none; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--err); margin-top: 5px; }
+  .err-text { display: none; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--err); margin-top: 8px; font-weight: bold; }
   .field-wrap.error .err-text { display: block; }
   .req-mark { color: var(--accent); }
 
-  .checks { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+  /* --- Чекбоксы и радио --- */
+  .checks { display: flex; flex-wrap: wrap; gap: 10px; }
   .checks label {
-    font-family: Arial, Helvetica, sans-serif; font-size: 14px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 7px;
-    border: 1px solid var(--line); border-radius: 24px; padding: 7px 14px; background: #fff; user-select: none;
-    transition: border-color .15s, background-color .15s;
+    font-family: Arial, Helvetica, sans-serif; font-size: 15px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid #c9c2b8; border-radius: 30px; padding: 10px 18px; background: #faf9f7; user-select: none;
+    transition: all .15s ease;
   }
-  .checks label:hover { border-color: var(--accent); }
-  .checks label.on { border-color: var(--accent); background: #f9ece4; }
-  .checks input { accent-color: var(--accent); }
+  .checks label:hover { border-color: var(--accent); background: #fff; }
+  .checks label.on { border-color: var(--accent); background: var(--accent-soft); font-weight: bold; color: var(--accent-dark); }
+  .checks input { accent-color: var(--accent); width: 18px; height: 18px; }
 
+  /* --- Блок действий --- */
   .actions {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 22px;
-    padding-top: 22px;
+    gap: 16px;
+    padding-top: 30px;
   }
-  .actions-alt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 20px 16px;
-    border: 1px dashed var(--line);
-    border-radius: 10px;
-    background: rgba(255, 253, 248, 0.6);
-    max-width: 420px;
-    margin: 0 auto;
-  }
-  .hint2 {
+  
+  /* Сообщение об успехе теперь прямо под кнопкой */
+  #msg {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12.5px;
-    color: var(--muted);
+    display: none;
+    margin: 0 auto 10px auto;
+    font-size: 15px;
+    font-weight: bold;
     line-height: 1.5;
-    max-width: 380px;
-    margin: 0 auto;
+    max-width: 480px;
+    padding: 16px 20px;
+    border-radius: 8px;
     text-align: center;
+    animation: fadeIn 0.3s ease;
   }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+  #msg.ok { color: #1e5a36; background: #e8f5ec; border: 1px solid #a8d4b8; }
+  #msg.bad { color: #7a2219; background: #fce8e6; border: 1px solid #f0b8b3; }
+  #msg.visible { display: block; }
 
   .btn {
     font-family: Arial, Helvetica, sans-serif;
@@ -103,21 +128,18 @@
     justify-content: center;
     gap: 8px;
     width: 100%;
-    max-width: 360px;
-    min-height: 50px;
-    padding: 13px 20px;
+    max-width: 380px;
+    min-height: 56px;
+    padding: 14px 24px;
     border: 1px solid transparent;
     border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 0.01em;
+    font-size: 17px;
+    font-weight: bold;
     cursor: pointer;
     text-decoration: none;
     position: relative;
-    transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .05s ease;
+    transition: all .2s ease;
     -webkit-tap-highlight-color: transparent;
-    user-select: none;
   }
   .btn:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
   .btn:active:not(:disabled) { transform: translateY(1px); }
@@ -126,109 +148,106 @@
   .btn-main {
     background: var(--accent);
     color: #fff;
-    box-shadow: 0 1px 2px rgba(36, 48, 62, 0.08), 0 2px 8px rgba(176, 86, 47, 0.20);
+    box-shadow: 0 4px 12px rgba(176, 86, 47, 0.25);
   }
-  .btn-main:hover:not(:disabled) { background: var(--accent-dark); }
-  .btn-main:active:not(:disabled) { box-shadow: 0 1px 2px rgba(36, 48, 62, 0.10); }
-
-  .btn-alt {
-    background: #fff;
-    color: var(--ink);
-    border-color: var(--line);
-  }
-  .btn-alt:hover:not(:disabled) { border-color: var(--ink); background: var(--paper); }
+  .btn-main:hover:not(:disabled) { background: var(--accent-dark); box-shadow: 0 6px 16px rgba(176, 86, 47, 0.3); }
 
   .btn-outline {
     background: transparent;
     color: var(--ink);
-    border: 1px solid var(--line);
-    font-weight: 500;
-    min-height: 44px;
-    font-size: 15px;
+    border: 1px solid #c9c2b8;
+    font-weight: normal;
+    min-height: 48px;
+    font-size: 16px;
   }
-  .btn-outline:hover:not(:disabled) { border-color: var(--muted); }
+  .btn-outline:hover:not(:disabled) { border-color: var(--ink); background: #fff; }
 
+  /* --- Блок WhatsApp --- */
+  .actions-alt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 24px;
+    border: 1px dashed #dcd6cd;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    max-width: 440px;
+    margin: 16px auto;
+  }
+  .btn-alt {
+    background: #fff;
+    color: var(--ink);
+    border-color: #c9c2b8;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  .btn-alt:hover:not(:disabled) { border-color: var(--ink); }
+  .hint2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 360px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* --- Загрузка (спиннер) --- */
   .btn.is-loading { color: transparent !important; pointer-events: none; }
   .btn.is-loading::after {
     content: "";
     position: absolute;
     top: 50%; left: 50%;
-    width: 20px; height: 20px;
-    margin: -10px 0 0 -10px;
+    width: 24px; height: 24px;
+    margin: -12px 0 0 -12px;
     border-radius: 50%;
-    border: 2.5px solid rgba(255, 255, 255, 0.35);
+    border: 3px solid rgba(255, 255, 255, 0.3);
     border-top-color: #fff;
-    animation: btn-spin .7s linear infinite;
+    animation: btn-spin .8s linear infinite;
   }
-  .btn-alt.is-loading::after, .btn-outline.is-loading::after {
-    border-color: rgba(36, 48, 62, 0.25);
+  .btn-outline.is-loading::after, .btn-alt.is-loading::after {
+    border-color: rgba(36, 48, 62, 0.2);
     border-top-color: var(--ink);
   }
   @keyframes btn-spin { to { transform: rotate(360deg); } }
 
+  /* --- Тихие ссылки --- */
   .actions-quiet {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 2px 6px;
+    gap: 4px 12px;
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: 16px;
   }
   .btn-link {
     background: none;
     border: 0;
-    padding: 8px 10px;
+    padding: 8px 4px;
     color: var(--muted);
     font-family: inherit;
     font-size: 14px;
     text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
     cursor: pointer;
-    border-radius: 4px;
-    transition: color .15s ease, background-color .15s ease;
+    transition: color .15s ease;
   }
-  .btn-link:hover { color: var(--ink); background: rgba(36, 48, 62, 0.05); }
-  .btn-link:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
-  .actions-quiet .dot { color: var(--line); user-select: none; }
+  .btn-link:hover { color: var(--ink); }
+  .actions-quiet .dot { color: #c9c2b8; }
 
-  .phone-field {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-  }
+  .phone-field { width: 100%; max-width: 320px; margin: 0 auto; }
   .phone-field input { text-align: center; }
 
-  #msg {
-    font-family: Arial, Helvetica, sans-serif;
-    display: none;
-    margin: 0 auto;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.5;
-    max-width: 480px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  #msg.ok { color: var(--ok); background: rgba(46, 125, 79, 0.08); border: 1px solid rgba(46, 125, 79, 0.2); }
-  #msg.bad { color: var(--err); background: rgba(192, 57, 43, 0.06); border: 1px solid rgba(192, 57, 43, 0.2); }
-  #msg.visible { display: block; }
+  /* Ловушка */
+  .hp { position: absolute !important; left: -9999px !important; opacity: 0; }
 
-  .hp {
-    position: absolute !important;
-    left: -9999px !important;
-    top: auto !important;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-  }
-
-  footer { text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); padding: 24px 0 20px; max-width: 520px; margin: 0 auto; line-height: 1.6; }
+  footer { text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); padding: 30px 0 20px; max-width: 520px; margin: 0 auto; line-height: 1.6; }
 
   @media (max-width: 520px) {
-    .top h1 { font-size: 25px; } .top { padding-top: 30px; }
-    .card { padding: 20px 16px; }
+    .top h1 { font-size: 28px; } .top { padding-top: 30px; }
+    .card { padding: 24px 20px; }
     .checks label { width: 100%; }
     .actions-quiet { flex-direction: column; gap: 0; }
     .actions-quiet .dot { display: none; }
@@ -244,25 +263,24 @@
     <h1>Ответы для вашего сайта</h1>
     <p>Заполните анкету — это займёт около 15 минут. Ответы сохраняются автоматически: можно закрыть страницу и продолжить позже. По завершении нажмите кнопку внизу.</p>
     <div class="progress">
-      <div class="bar" id="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0" aria-label="Прогресс заполнения анкеты"><div class="fill" id="pfill"></div></div>
+      <div class="bar" id="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0" aria-label="Прогресс"><div class="fill" id="pfill"></div></div>
       <div class="label" id="plabel">Заполнено 0 из 9 разделов</div>
       <div class="saved-note" id="savednote">Автосохранение включено</div>
     </div>
   </div>
 
   <form id="anketa" novalidate>
-    <!-- Ловушка для ботов: человек её не видит и не заполняет -->
     <input type="text" class="hp" id="honeypot" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
 
   <div class="card">
     <h2>1. Основные сведения</h2>
     <div class="sub">Будет размещено на главной странице сайта.</div>
     <div class="q field-wrap"><label class="qtext" for="f1">Название центра <span class="req-mark">*</span></label>
-      <input type="text" id="f1" placeholder="Например: Языковой центр «Мир»" aria-describedby="err-f1"><div class="err-text" id="err-f1" aria-live="polite">Укажите название центра.</div></div>
+      <input type="text" id="f1" placeholder="Например: Языковой центр «Мир»" aria-describedby="err-f1"><div class="err-text" id="err-f1">Укажите название центра.</div></div>
     <div class="q field-wrap"><label class="qtext" for="f2">Имя и фамилия для подписи на сайте <span class="req-mark">*</span></label>
-      <input type="text" id="f2" placeholder="Например: Марина Иванова" autocomplete="name" aria-describedby="err-f2"><div class="err-text" id="err-f2" aria-live="polite">Укажите, как вас представлять посетителям.</div></div>
+      <input type="text" id="f2" placeholder="Например: Марина Иванова" autocomplete="name" aria-describedby="err-f2"><div class="err-text" id="err-f2">Укажите, как вас представлять посетителям.</div></div>
     <div class="q field-wrap"><label class="qtext" for="f3">Стаж преподавания <span class="req-mark">*</span></label>
-      <input type="text" id="f3" placeholder="Например: 20 лет" aria-describedby="err-f3"><div class="err-text" id="err-f3" aria-live="polite">Укажите стаж (можно примерно).</div></div>
+      <input type="text" id="f3" placeholder="Например: 20 лет" aria-describedby="err-f3"><div class="err-text" id="err-f3">Укажите стаж (можно примерно).</div></div>
     <div class="q"><label class="qtext" for="f4">О себе — 3–5 предложений</label>
       <textarea id="f4" placeholder="Например: специализация, методика, с какими задачами работаете"></textarea>
       <div class="hint">Допускается краткая форма — формулировки будут доработаны при подготовке сайта.</div></div>
@@ -296,7 +314,7 @@
       <label><input type="checkbox" class="svc" value="Переводы документов"><span>Переводы документов</span></label>
       <label><input type="checkbox" class="svc" value="Онлайн-занятия"><span>Онлайн-занятия</span></label>
     </div>
-    <div class="q"><label class="qtext" for="f10">Переводы: виды и стоимость</label>
+    <div class="q" style="margin-top:24px;"><label class="qtext" for="f10">Переводы: виды и стоимость</label>
       <textarea id="f10" placeholder="Например: паспорт — 1000 ₽, страница технического текста — от 500 ₽"></textarea></div>
     <div class="q"><div class="qtext" id="lbl-trial">Пробное занятие</div>
       <div class="checks" role="group" aria-labelledby="lbl-trial">
@@ -338,12 +356,12 @@
     <h2>6. Контактные данные</h2>
     <div class="sub">Будет размещено в подвале сайта и на кнопках связи.</div>
     <div class="q field-wrap"><label class="qtext" for="f19">Телефон для сайта <span class="req-mark">*</span></label>
-      <input type="tel" id="f19" placeholder="+7 928 000-00-00" autocomplete="tel" aria-describedby="err-f19"><div class="err-text" id="err-f19" aria-live="polite">Введите телефон в формате +7 или 8, 11 цифр.</div></div>
+      <input type="tel" id="f19" placeholder="+7 928 000-00-00" autocomplete="tel" aria-describedby="err-f19"><div class="err-text" id="err-f19">Введите телефон в формате +7 или 8, 11 цифр.</div></div>
     <div class="q"><label class="qtext" for="f20">WhatsApp или Telegram</label><input type="text" id="f20" placeholder="Номер или @ник"></div>
     <div class="q field-wrap"><label class="qtext" for="f21">Электронная почта</label>
-      <input type="email" id="f21" placeholder="pochta@example.ru" autocomplete="email" aria-describedby="err-f21"><div class="err-text" id="err-f21" aria-live="polite">Проверьте адрес: должны быть знак @ и точка после него.</div></div>
+      <input type="email" id="f21" placeholder="pochta@example.ru" autocomplete="email" aria-describedby="err-f21"><div class="err-text" id="err-f21">Проверьте адрес: должны быть знак @ и точка после него.</div></div>
     <div class="q field-wrap"><label class="qtext" for="f22">Ссылка на соцсети</label>
-      <input type="url" id="f22" placeholder="https://vk.com/..." autocomplete="url" aria-describedby="err-f22"><div class="err-text" id="err-f22" aria-live="polite">Проверьте ссылку. Допускается без https:// — добавим автоматически.</div></div>
+      <input type="url" id="f22" placeholder="https://vk.com/..." autocomplete="url" aria-describedby="err-f22"><div class="err-text" id="err-f22">Проверьте ссылку. Допускается без https:// — добавим автоматически.</div></div>
     <div class="q"><label class="qtext" for="f23">Удобное время для звонков и сообщений</label>
       <input type="text" id="f23" placeholder="Например: ежедневно с 9:00 до 21:00"></div>
   </div>
@@ -381,16 +399,21 @@
 
   </form>
 
+  <!-- БЛОК ДЕЙСТВИЙ -->
   <div class="actions">
     <button type="button" class="btn btn-main" id="btn-email" onclick="sendEmail()">Отправить на почту</button>
+    
+    <!-- Сообщение теперь сразу под кнопкой почты -->
+    <div id="msg" role="status" aria-live="polite"></div>
+
     <button type="button" class="btn btn-outline" onclick="saveAndClose()">Сохранить и закрыть</button>
 
     <div class="actions-alt">
       <button type="button" class="btn btn-alt" id="btn-wa" onclick="sendWA()">Отправить в WhatsApp</button>
-      <p class="hint2">Для отправки в WhatsApp укажите номер получателя — 11 цифр, начиная с 7.</p>
+      <p class="hint2">Для отправки в WhatsApp укажите номер получателя — 11 цифр, начиная с 7 или 8.</p>
       <div id="phone-wrap" class="field-wrap phone-field">
         <input type="tel" id="phone" placeholder="79001234567" autocomplete="tel" aria-label="Номер WhatsApp для отправки анкеты" aria-describedby="err-phone">
-        <div class="err-text" id="err-phone" aria-live="polite">Введите 11 цифр номера, начиная с 7.</div>
+        <div class="err-text" id="err-phone">Введите 11 цифр номера (7 или 8).</div>
       </div>
     </div>
 
@@ -401,8 +424,6 @@
       <span class="dot" aria-hidden="true">·</span>
       <button type="button" class="btn-link" onclick="clearDraft()">Удалить черновик</button>
     </div>
-
-    <div id="msg" role="status" aria-live="polite"></div>
   </div>
 
   <footer>Черновик хранится в этом браузере. При отправке данные уходят через сервис Web3Forms на почту получателя.</footer>
@@ -412,7 +433,7 @@
 (function () {
   "use strict";
   var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20","f21","f22","f23","f24","f25","f26","phone"];
-  var KEY = "anketa_draft_v6";
+  var KEY = "anketa_draft_v7";
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
@@ -475,7 +496,7 @@
     }
   }
 
-  /* ---------- прогресс: раздел считается заполненным, если в нём есть хотя бы одно значимое поле ---------- */
+  /* ---------- прогресс ---------- */
   function sectionFilled(num) {
     function has(id) { return $(id) && $(id).value.trim().length > 0; }
     switch (num) {
@@ -628,7 +649,9 @@
   function sendEmail() {
     if (!validateForm(true)) { show("Проверьте подсвеченные поля.", false); return; }
     if ($("honeypot").value) { show("Отправка отменена.", false); return; }
+    
     var btn = $("btn-email");
+    var originalText = btn.textContent;
     setLoading(btn, true);
 
     fetch("https://api.web3forms.com/submit", {
@@ -640,6 +663,18 @@
     .then(function (data) {
       setLoading(btn, false);
       if (data && data.success) {
+        
+        // Кнопка становится зелёной с галочкой
+        btn.style.backgroundColor = "var(--ok)";
+        btn.style.borderColor = "var(--ok)";
+        btn.innerHTML = "Отправлено ✓";
+        
+        setTimeout(function() {
+          btn.style.backgroundColor = "";
+          btn.style.borderColor = "";
+          btn.textContent = originalText;
+        }, 5000);
+
         show("Анкета отправлена на почту. Если письмо не пришло в течение 5 минут — проверьте папку «Спам». Если и там нет, воспользуйтесь кнопкой «Скачать файлом» и пришлите вручную.", true, 14000);
       } else {
         console.error("Web3Forms response:", data);
