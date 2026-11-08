@@ -72,7 +72,12 @@
 
   .field-wrap.error input, .field-wrap.error textarea { border-color: var(--err); background: #fef2f2; }
   .err-text { display: none; color: var(--err); font-size: 13px; margin-top: 6px; font-weight: 500; }
-  .field-wrap.error .err-text { display: block; }
+  .field-wrap.error .err-text { display: block; animation: shake 0.3s ease-in-out; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
   .req { color: var(--err); }
 
   .actions { text-align: center; margin-top: 40px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
@@ -141,7 +146,7 @@
       <div class="q field-wrap">
         <label for="f3">Твой номер телефона <span class="req">*</span></label>
         <input type="tel" id="f3" placeholder="+7 999 000-00-00">
-        <div class="err-text">Нужен номер для связи.</div>
+        <div class="err-text">Введи корректный номер (11 цифр, можно с +7).</div>
       </div>
 
       <div class="q">
@@ -284,13 +289,13 @@
       <div class="q field-wrap">
         <label for="f15">Сколько стоит одно занятие? <span class="req">*</span></label>
         <input type="text" id="f15" placeholder="Укажи цену. Есть абонементы или скидки?">
-        <div class="err-text">Укажи цену.</div>
+        <div class="err-text">Напиши цену или слово "По запросу".</div>
       </div>
 
       <div class="q field-wrap">
         <label for="f16">Сколько стоит перевод? <span class="req">*</span></label>
         <input type="text" id="f16" placeholder="От чего зависит цена (за страницу, за документ)?">
-        <div class="err-text">Укажи цену.</div>
+        <div class="err-text">Напиши цену или слово "По запросу".</div>
       </div>
 
       <div class="q">
@@ -392,11 +397,23 @@
 (function () {
   "use strict";
   var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20"];
-  var KEY = "anketa_oksana_final_v5";
+  var KEY = "anketa_oksana_perfect";
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
 
+  /* ---------- Валидация телефона ---------- */
+  function normalizePhone(v) {
+    var d = v.replace(/\D/g, "");
+    if (d.length === 11 && d.charAt(0) === "8") d = "7" + d.slice(1);
+    return d;
+  }
+  function isPhoneOk(v) {
+    var d = normalizePhone(v);
+    return d.length === 11 && d.charAt(0) === "7";
+  }
+
+  /* ---------- Автосохранение ---------- */
   function saveDraft() {
     var data = {}, i, inputs;
     for (i = 0; i < FIELDS.length; i++) if ($(FIELDS[i])) data[FIELDS[i]] = $(FIELDS[i]).value;
@@ -432,22 +449,24 @@
     show("Сохранено! Можешь закрыть страницу.", true);
   }
 
+  /* ---------- Прогресс ---------- */
   function updateProgress() {
     var filled = 0;
     function has(id) { return $(id) && $(id).value.trim().length > 0; }
-    if (has("f1") && has("f2") && has("f3")) filled++; // 1
-    if (has("f6") || has("f8")) filled++; // 2
-    if (document.querySelector("input[name=format]:checked") || has("f10")) filled++; // 3
-    if (document.querySelector("input[name=trans_docs]:checked") || has("f12")) filled++; // 4
-    if (has("f15") || has("f16")) filled++; // 5
-    if (has("f17") || has("f18")) filled++; // 6
-    if (has("f19") || document.querySelector("input[name=first_screen]:checked")) filled++; // 7
+    if (has("f1") && has("f2") && has("f3")) filled++;
+    if (has("f6") || has("f8")) filled++;
+    if (document.querySelector("input[name=format]:checked") || has("f10")) filled++;
+    if (document.querySelector("input[name=trans_docs]:checked") || has("f12")) filled++;
+    if (has("f15") || has("f16")) filled++;
+    if (has("f17") || has("f18")) filled++;
+    if (has("f19") || document.querySelector("input[name=first_screen]:checked")) filled++;
     
     var pct = Math.round(filled / 7 * 100);
     $("pfill").style.width = pct + "%";
     $("plabel").textContent = "Заполнено " + filled + " из 7";
   }
 
+  /* ---------- Ошибки ---------- */
   function markError(id, bad) {
     var el = $(id);
     if (!el) return;
@@ -460,19 +479,30 @@
 
   function validateForm() {
     var firstBad = null;
-    ["f1","f2","f3","f15","f16","f19"].forEach(function(id) {
+    
+    // Текстовые поля (не пустые)
+    ["f1","f2","f15","f16","f19"].forEach(function(id) {
       var v = $(id).value.trim();
       markError(id, !v);
       if (!v && !firstBad) firstBad = id;
     });
+
+    // Телефон (проверка формата)
+    var phoneVal = $("f3").value.trim();
+    var phoneBad = !phoneVal || !isPhoneOk(phoneVal);
+    markError("f3", phoneBad);
+    if (phoneBad && !firstBad) firstBad = "f3";
+
     if (firstBad) {
-      $(firstBad).scrollIntoView({ behavior: "smooth", block: "center" });
-      $(firstBad).focus();
+      var el = $(firstBad);
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.focus();
       return false;
     }
     return true;
   }
 
+  /* ---------- Сбор данных ---------- */
   function collectPairs() {
     function val(id) { var v = $(id).value.trim(); return v || "—"; }
     function group(name) {
@@ -516,8 +546,9 @@
     setTimeout(function () { m.className = "msg"; }, 10000);
   }
 
+  /* ---------- Действия ---------- */
   function sendEmail() {
-    if (!validateForm()) { show("Заполни обязательные поля (подпись, адрес, телефон, цены, название).", false); return; }
+    if (!validateForm()) { show("Проверь выделенные красным поля (особенно телефон).", false); return; }
     var btn = $("btn-email");
     var old = btn.textContent;
     btn.textContent = "Отправка...";
@@ -535,25 +566,25 @@
       if (data && data.success) {
         show("Всё отправилось! Спасибо, Оксана.", true);
       } else {
-        show("Ошибка. Попробуй еще раз.", false);
+        show("Ошибка сервера. Попробуй скачать файл.", false);
       }
     })
     .catch(function () {
       btn.textContent = old;
       btn.disabled = false;
-      show("Нет интернета. Попробуй еще раз.", false);
+      show("Нет интернета. Попробуй скачать файл.", false);
     });
   }
 
   function copyAnswers() {
-    if (!validateForm()) { show("Заполни обязательные поля.", false); return; }
+    if (!validateForm()) { show("Заполни обязательные поля (и проверь телефон).", false); return; }
     navigator.clipboard.writeText(collect()).then(function() {
       show("Текст скопирован!", true);
     });
   }
 
   function downloadFile() {
-    if (!validateForm()) { show("Заполни обязательные поля.", false); return; }
+    if (!validateForm()) { show("Заполни обязательные поля (и проверь телефон).", false); return; }
     var blob = new Blob([collect()], { type: "text/plain;charset=utf-8" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -562,6 +593,7 @@
     show("Файл скачан.", true);
   }
 
+  /* ---------- Слушатели ---------- */
   document.querySelectorAll("input, textarea").forEach(function(el) {
     el.addEventListener("input", function () {
       if (this.id) markError(this.id, false);
