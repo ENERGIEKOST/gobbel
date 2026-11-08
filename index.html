@@ -145,13 +145,13 @@
 
       <div class="q field-wrap">
         <label for="f3">Твой номер телефона <span class="req">*</span></label>
-        <input type="tel" id="f3" placeholder="+7 999 000-00-00">
-        <div class="err-text">Введи корректный номер (11 цифр, можно с +7).</div>
+        <input type="tel" id="f3" placeholder="79991234567">
+        <div class="err-text">Введите номер без 8 (например: 79991234567).</div>
       </div>
 
       <div class="q">
-        <label for="f4">Номер WhatsApp</label>
-        <input type="tel" id="f4" placeholder="+7 999 000-00-00">
+        <label for="f4">Номер WhatsApp (если отличается)</label>
+        <input type="tel" id="f4" placeholder="79991234567">
       </div>
 
       <div class="q">
@@ -402,12 +402,16 @@
 
   function $(id) { return document.getElementById(id); }
 
-  /* ---------- Валидация телефона ---------- */
+  /* ---------- Валидация и нормализация телефона ---------- */
   function normalizePhone(v) {
     var d = v.replace(/\D/g, "");
+    // Если ввели 8 в начале и всего 11 цифр -> меняем на 7
     if (d.length === 11 && d.charAt(0) === "8") d = "7" + d.slice(1);
+    // Если ввели 10 цифр (например, без 7 и без 8) и начинается с 9 -> добавляем 7
+    if (d.length === 10 && d.charAt(0) === "9") d = "7" + d;
     return d;
   }
+
   function isPhoneOk(v) {
     var d = normalizePhone(v);
     return d.length === 11 && d.charAt(0) === "7";
