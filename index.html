@@ -53,6 +53,7 @@
   .q { margin-bottom: 24px; }
   .q label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 15px; }
   .q .hint { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: normal; }
+  
   input[type="text"], input[type="tel"], textarea {
     width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px;
     font-family: inherit; font-size: 15px; background: #f8fafc; transition: all 0.2s;
@@ -79,6 +80,15 @@
     75% { transform: translateX(4px); }
   }
   .req { color: var(--err); }
+
+  /* Кнопка добавления пункта в свободное поле */
+  .btn-add-point {
+    display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px;
+    background: #eff6ff; color: var(--primary); border: 1px solid #bfdbfe; 
+    padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .btn-add-point:hover { background: #dbeafe; border-color: var(--primary); }
 
   .actions { text-align: center; margin-top: 40px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
   .btn {
@@ -360,14 +370,16 @@
       </div>
     </div>
 
-    <!-- 8. Свободное поле (ДОБАВЛЕНО) -->
-    <div class="card">
+    <!-- 8. Свободное поле (ЧЕТКО ВНИЗУ) -->
+    <div class="card" style="border: 2px solid var(--primary); background: #eff6ff;">
       <div class="card-title"><span>8</span> Свободное поле</div>
       <div class="card-sub">Тут можешь написать всё, что я забыл спросить, или что считаешь важным.</div>
       
       <div class="q">
         <label for="f21">Твои дополнения</label>
-        <textarea id="f21" style="min-height: 150px;" placeholder="Пиши сюда всё, что душе угодно. Например: 'У меня есть 3 отзыва на Яндексе, я забыла скинуть' или 'Хочу, чтобы на сайте была форма записи по времени'."></textarea>
+        <div class="hint" style="margin-bottom: 12px;">Жми кнопку ниже, чтобы добавить новый пункт. Он автоматически пронумеруется.</div>
+        <button type="button" class="btn-add-point" onclick="addPoint()">➕ Добавить пункт</button>
+        <textarea id="f21" style="min-height: 150px; background: #fff;" placeholder="Здесь появятся твои пункты..."></textarea>
       </div>
     </div>
 
@@ -395,6 +407,25 @@
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
+
+  /* ---------- Добавление пункта в свободное поле ---------- */
+  function addPoint() {
+    var ta = $("f21");
+    var val = ta.value;
+    var lines = val.split("\n").filter(function(line) { return line.trim() !== ""; });
+    var nextNum = lines.length + 1;
+    
+    if (val.length > 0 && !val.endsWith("\n")) {
+      ta.value += "\n" + nextNum + ") ";
+    } else {
+      ta.value += nextNum + ") ";
+    }
+    
+    ta.focus();
+    // Прокручиваем вниз, чтобы увидеть новый пункт
+    ta.scrollTop = ta.scrollHeight;
+    saveDraft();
+  }
 
   /* ---------- Валидация телефона ---------- */
   function normalizePhone(v) {
@@ -599,6 +630,7 @@
     el.addEventListener("change", saveDraft);
   });
 
+  window.addPoint = addPoint;
   window.sendEmail = sendEmail;
   window.saveAndClose = saveAndClose;
   window.copyAnswers = copyAnswers;
