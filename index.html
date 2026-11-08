@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Анкета для Оксаны — сайт репетитора и переводчика</title>
+<title>Анкета для Оксаны</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,111 +17,82 @@
     --primary-hover: #1d4ed8;
     --border: #e2e8f0;
     --err: #dc2626;
-    --ok: #059669;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
     font-size: 16px;
-    -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; }
 
-  /* Шапка */
   .header { text-align: center; margin-bottom: 40px; }
-  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; color: var(--text); }
+  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; }
   .header p { color: var(--text-muted); font-size: 16px; max-width: 540px; margin: 0 auto; }
 
-  /* Прогресс */
   .progress-container {
-    margin-top: 24px;
-    background: var(--card);
-    padding: 16px 24px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 24px; background: var(--card); padding: 16px 24px; border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 16px;
+    max-width: 500px; margin-left: auto; margin-right: auto;
   }
   .progress-bar { flex-grow: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-  .progress-fill { height: 100%; width: 0; background: var(--primary); transition: width 0.3s ease; border-radius: 4px; }
+  .progress-fill { height: 100%; width: 0; background: var(--primary); transition: width 0.3s ease; }
   .progress-text { font-size: 13px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
 
-  /* Карточки */
   .card {
-    background: var(--card);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -1px rgba(0,0,0,0.02);
-    border: 1px solid var(--border);
+    background: var(--card); border-radius: 16px; padding: 32px; margin-bottom: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); border: 1px solid var(--border);
   }
   .card-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
-  .card-title span {
-    background: var(--primary); color: white; width: 30px; height: 30px;
-    display: inline-flex; align-items: center; justify-content: center;
-    border-radius: 8px; font-size: 15px;
-  }
+  .card-title span { background: var(--primary); color: white; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 15px; }
   .card-sub { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
 
-  /* Поля */
   .q { margin-bottom: 24px; }
-  .q label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 15px; color: var(--text); }
+  .q label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 15px; }
   .q .hint { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: normal; }
-  input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea {
+  input[type="text"], input[type="tel"], input[type="url"], textarea {
     width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px;
-    font-family: inherit; font-size: 15px; color: var(--text); background: #f8fafc; transition: all 0.2s;
+    font-family: inherit; font-size: 15px; background: #f8fafc; transition: all 0.2s;
   }
-  input:focus, textarea:focus {
-    outline: none; border-color: var(--primary); background: #fff;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  }
+  input:focus, textarea:focus { outline: none; border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
   textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
   .q-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 600px) { .q-row { grid-template-columns: 1fr; } }
 
-  /* Опции */
   .options-grid { display: flex; flex-wrap: wrap; gap: 10px; }
   .options-grid label {
     display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px;
     background: #f8fafc; border: 1px solid var(--border); border-radius: 8px;
-    font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; user-select: none;
+    font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s;
   }
   .options-grid label:hover { border-color: var(--primary); background: #fff; }
   .options-grid label:has(input:checked) { border-color: var(--primary); background: #eff6ff; }
   .options-grid input { width: 16px; height: 16px; accent-color: var(--primary); }
 
-  /* Ошибки */
   .field-wrap.error input, .field-wrap.error textarea { border-color: var(--err); background: #fef2f2; }
   .err-text { display: none; color: var(--err); font-size: 13px; margin-top: 6px; font-weight: 500; }
   .field-wrap.error .err-text { display: block; }
   .req { color: var(--err); }
 
-  /* Кнопки */
   .actions { text-align: center; margin-top: 40px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
   .btn {
     display: inline-flex; align-items: center; justify-content: center;
     width: 100%; max-width: 400px; padding: 16px 24px; border-radius: 10px;
-    font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s;
-    border: none; font-family: inherit;
+    font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none;
   }
   .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
   .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-outline:hover { background: #fff; border-color: var(--text-muted); }
-  .msg { display: none; padding: 16px; border-radius: 10px; font-weight: 500; font-size: 15px; max-width: 500px; margin: 0 auto; text-align: center; }
+  .btn-outline { background: transparent; border: 1px solid var(--border); }
+  .btn-outline:hover { background: #fff; }
+
+  .msg { display: none; padding: 16px; border-radius: 10px; font-weight: 500; font-size: 15px; max-width: 500px; margin: 0 auto; }
   .msg.ok { background: #ecfdf5; color: #065f46; border: 1px solid #34d399; display: block; }
   .msg.bad { background: #fef2f2; color: #991b1b; border: 1px solid #f87171; display: block; }
+
   .actions-quiet { display: flex; gap: 20px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
-  .btn-link { background: none; border: none; color: var(--text-muted); font-size: 14px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; font-family: inherit; }
-  .btn-link:hover { color: var(--primary); }
-  .footer-note { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 40px; }
+  .btn-link { background: none; border: none; color: var(--text-muted); font-size: 14px; cursor: pointer; text-decoration: underline; font-family: inherit; }
   .hp { position: absolute; left: -9999px; opacity: 0; }
 </style>
 </head>
@@ -129,118 +100,119 @@
 
 <div class="wrap">
   <div class="header">
-    <h1>Анкета для сайта</h1>
-    <p>Привет, Оксана! Заполни эту анкету, чтобы мы могли создать для тебя идеальный сайт. Где нужно — выбирай варианты, где нужно — пиши своими словами.</p>
+    <h1>Привет, Оксана!</h1>
+    <p>Заполни эту анкету, чтобы я сделал тебе красивый сайт. Просто расскажи всё о своей работе, а я перенесу это на страницу.</p>
     <div class="progress-container">
       <div class="progress-bar"><div class="progress-fill" id="pfill"></div></div>
-      <div class="progress-text" id="plabel">Заполнено 0 из 7</div>
+      <div class="progress-text" id="plabel">Заполнено 0 из 5</div>
     </div>
   </div>
 
   <form id="anketa" novalidate>
-    <input type="text" class="hp" id="honeypot" name="botcheck" tabindex="-1" autocomplete="off">
+    <input type="text" class="hp" id="honeypot" name="botcheck" tabindex="-1">
 
-    <!-- 1. Контакты и кабинет -->
+    <!-- 1. Кто ты и где тебя найти -->
     <div class="card">
       <div class="card-title"><span>1</span> Контакты и кабинет</div>
-      <div class="card-sub">Как с тобой связаться и где ты находишься.</div>
+      <div class="card-sub">Чтобы клиенты знали, куда идти и как звонить.</div>
       
       <div class="q field-wrap">
-        <label for="f1">Как тебя представить на сайте? <span class="req">*</span></label>
-        <input type="text" id="f1" placeholder="Например: Оксана — репетитор английского и переводчик">
-        <div class="err-text">Напиши, как тебя подписать.</div>
+        <label for="f1">Как тебя подписать на сайте? <span class="req">*</span></label>
+        <input type="text" id="f1" placeholder="Например: Оксана — преподаватель английского">
+        <div class="err-text">Напиши, как тебя представить.</div>
       </div>
       
       <div class="q field-wrap">
-        <label for="f2">Точный адрес кабинета <span class="req">*</span></label>
+        <label for="f2">Точный адрес твоего кабинета <span class="req">*</span></label>
         <input type="text" id="f2" placeholder="Город, улица, дом, офис">
-        <div class="err-text">Укажи адрес кабинета.</div>
+        <div class="err-text">Укажи адрес.</div>
       </div>
 
       <div class="q">
-        <label for="f3">Ссылка на точку в Яндекс.Картах</label>
+        <label for="f3">Ссылка на твою точку в Яндекс.Картах</label>
+        <span class="hint">Скопируй ссылку из браузера, когда откроешь карту.</span>
         <input type="url" id="f3" placeholder="https://yandex.ru/maps/...">
       </div>
 
-      <div class="q">
-        <label for="f4">Как к тебе удобнее добираться?</label>
-        <span class="hint">Рядом метро/остановка? Есть ли парковка?</span>
-        <textarea id="f4"></textarea>
-      </div>
-
       <div class="q field-wrap">
-        <label for="f5">Телефон для сайта <span class="req">*</span></label>
-        <input type="tel" id="f5" placeholder="+7 999 000-00-00">
-        <div class="err-text">Введи номер телефона.</div>
+        <label for="f4">Телефон <span class="req">*</span></label>
+        <input type="tel" id="f4" placeholder="+7 999 000-00-00">
+        <div class="err-text">Нужен номер для связи.</div>
       </div>
 
       <div class="q-row">
         <div class="q">
-          <label for="f6">Ссылка на Telegram</label>
-          <input type="text" id="f6" placeholder="@nickname или https://t.me/...">
+          <label for="f5">Telegram</label>
+          <input type="text" id="f5" placeholder="@nickname">
         </div>
         <div class="q">
-          <label for="f7">Номер для WhatsApp</label>
-          <input type="tel" id="f7" placeholder="+7 999 000-00-00">
+          <label for="f6">WhatsApp</label>
+          <input type="tel" id="f6" placeholder="+7 999 000-00-00">
         </div>
       </div>
     </div>
 
-    <!-- 2. Уроки -->
+    <!-- 2. О тебе -->
     <div class="card">
-      <div class="card-title"><span>2</span> Уроки (Обучение)</div>
-      <div class="card-sub">Информация о твоих занятиях.</div>
+      <div class="card-title"><span>2</span> Расскажи о себе</div>
+      <div class="card-sub">Эти тексты я размещу в блоке «Обо мне».</div>
       
       <div class="q">
-        <label>С кем ты работаешь?</label>
+        <label for="f7">Твоё образование и опыт</label>
+        <span class="hint">Какой вуз заканчивала, сколько лет уже работаешь?</span>
+        <textarea id="f7"></textarea>
+      </div>
+
+      <div class="q">
+        <label for="f8">Почему тебя выбирают?</label>
+        <span class="hint">Чем ты отличаешься от других репетиторов? Может, у тебя особый подход к детям или ты быстро делаешь переводы?</span>
+        <textarea id="f8"></textarea>
+      </div>
+    </div>
+
+    <!-- 3. Услуги: Уроки -->
+    <div class="card">
+      <div class="card-title"><span>3</span> Уроки</div>
+      <div class="card-sub">Кого и как ты учишь.</div>
+      
+      <div class="q">
+        <label>Кого ты обучаешь?</label>
         <div class="options-grid">
           <label><input type="checkbox" name="students" value="Дошкольники"><span>Дошкольники</span></label>
-          <label><input type="checkbox" name="students" value="1-4 класс"><span>1-4 класс</span></label>
-          <label><input type="checkbox" name="students" value="5-8 класс"><span>5-8 класс</span></label>
+          <label><input type="checkbox" name="students" value="Школьники 1-4"><span>1-4 класс</span></label>
+          <label><input type="checkbox" name="students" value="Школьники 5-8"><span>5-8 класс</span></label>
           <label><input type="checkbox" name="students" value="9-11 класс"><span>9-11 класс</span></label>
           <label><input type="checkbox" name="students" value="Подготовка к ОГЭ/ЕГЭ"><span>ОГЭ/ЕГЭ</span></label>
-          <label><input type="checkbox" name="students" value="Взрослые с нуля"><span>Взрослые с нуля</span></label>
-          <label><input type="checkbox" name="students" value="Бизнес-английский"><span>Бизнес-английский</span></label>
+          <label><input type="checkbox" name="students" value="Взрослые"><span>Взрослые</span></label>
         </div>
       </div>
 
       <div class="q">
-        <label>Формат занятий</label>
+        <label>Как проходят занятия?</label>
         <div class="options-grid">
-          <label><input type="radio" name="format" value="Только офлайн в кабинете"><span>Только офлайн</span></label>
-          <label><input type="radio" name="format" value="Офлайн + онлайн"><span>Офлайн + онлайн</span></label>
+          <label><input type="radio" name="format" value="Только офлайн"><span>Только в кабинете</span></label>
+          <label><input type="radio" name="format" value="Офлайн и онлайн"><span>В кабинете и онлайн</span></label>
         </div>
       </div>
 
       <div class="q">
         <label>Есть ли пробное занятие?</label>
         <div class="options-grid">
-          <label><input type="radio" name="trial" value="Да, бесплатное"><span>Да, бесплатное</span></label>
-          <label><input type="radio" name="trial" value="Да, платное"><span>Да, платное</span></label>
+          <label><input type="radio" name="trial" value="Бесплатное"><span>Да, бесплатное</span></label>
+          <label><input type="radio" name="trial" value="Платное"><span>Да, платное</span></label>
           <label><input type="radio" name="trial" value="Нет"><span>Нет</span></label>
         </div>
       </div>
-
-      <div class="q">
-        <label for="f8">Стоимость уроков</label>
-        <span class="hint">Напиши точную цену за час / «от ...» / или оставь пустым, если не хочешь указывать.</span>
-        <input type="text" id="f8" placeholder="Например: 1000 руб/час">
-      </div>
-
-      <div class="q">
-        <label for="f9">Есть ли скидки или абонементы?</label>
-        <input type="text" id="f9" placeholder="Например: при оплате 10 занятий скидка 10%">
-      </div>
     </div>
 
-    <!-- 3. Переводы -->
+    <!-- 4. Услуги: Переводы -->
     <div class="card">
-      <div class="card-title"><span>3</span> Переводы</div>
-      <div class="card-sub">Информация о твоих услугах перевода.</div>
+      <div class="card-title"><span>4</span> Переводы</div>
+      <div class="card-sub">Как ты работаешь с документами и текстами.</div>
       
       <div class="q">
-        <label for="f10">С какими языками работаешь?</label>
-        <input type="text" id="f10" placeholder="Например: английский, немецкий">
+        <label for="f9">С какими языками работаешь?</label>
+        <input type="text" id="f9" placeholder="Например: английский, немецкий">
       </div>
 
       <div class="q">
@@ -249,126 +221,51 @@
           <label><input type="checkbox" name="trans_type" value="Письменные"><span>Письменные</span></label>
           <label><input type="checkbox" name="trans_type" value="Документы"><span>Документы</span></label>
           <label><input type="checkbox" name="trans_type" value="Нотариальные"><span>Нотариальные</span></label>
-          <label><input type="checkbox" name="trans_type" value="Технические"><span>Технические</span></label>
           <label><input type="checkbox" name="trans_type" value="Устные"><span>Устные</span></label>
         </div>
       </div>
 
       <div class="q">
-        <label>Как принимаешь заказы?</label>
+        <label>Как клиенты передают тебе файлы?</label>
         <div class="options-grid">
-          <label><input type="radio" name="trans_how" value="Приносят бумаги в кабинет"><span>Приносят в кабинет</span></label>
-          <label><input type="radio" name="trans_how" value="Работаю только с файлами"><span>Только файлы</span></label>
+          <label><input type="radio" name="trans_how" value="В кабинете"><span>Приходят в кабинет</span></label>
+          <label><input type="radio" name="trans_how" value="Онлайн"><span>Присылают файлы онлайн</span></label>
           <label><input type="radio" name="trans_how" value="И так, и так"><span>И так, и так</span></label>
         </div>
       </div>
-
-      <div class="q">
-        <label for="f11">Стоимость переводов</label>
-        <span class="hint">Цена за страницу / «по запросу» / оставь пустым.</span>
-        <input type="text" id="f11" placeholder="Например: от 500 руб/страница">
-      </div>
     </div>
 
-    <!-- 4. О тебе и фишка -->
-    <div class="card">
-      <div class="card-title"><span>4</span> О тебе и твоя фишка</div>
-      <div class="card-sub">Это поможет написать тексты для сайта.</div>
-      
-      <div class="q">
-        <label for="f12">Твоё образование и стаж</label>
-        <textarea id="f12" placeholder="Вуз, специальность, сколько лет работаешь"></textarea>
-      </div>
-
-      <div class="q">
-        <label for="f13">Почему ученики идут к тебе, а не в крупные школы?</label>
-        <span class="hint">Твоя главная фишка. Например: «индивидуальный подход», «у меня комфортно и не страшно ошибаться».</span>
-        <textarea id="f13"></textarea>
-      </div>
-
-      <div class="q">
-        <label for="f14">Чем отличаются твои уроки?</label>
-        <span class="hint">Используешь игры, сериалы, интерактивную доску?</span>
-        <textarea id="f14"></textarea>
-      </div>
-
-      <div class="q">
-        <label for="f15">О чём тебя чаще всего спрашивают?</label>
-        <span class="hint">Напиши 2-3 вопроса и ответы на них (для блока FAQ на сайте).</span>
-        <textarea id="f15" placeholder="Вопрос: ...&#10;Ответ: ..."></textarea>
-      </div>
-    </div>
-
-    <!-- 5. Материалы -->
+    <!-- 5. Материалы для сайта -->
     <div class="card">
       <div class="card-title"><span>5</span> Материалы</div>
-      <div class="card-sub">Что у тебя уже есть для сайта.</div>
+      <div class="card-sub">Что у тебя есть, чтобы я мог наполнить сайт.</div>
       
       <div class="q">
         <label>Есть ли твои личные фото?</label>
         <div class="options-grid">
-          <label><input type="radio" name="photo_person" value="Да, есть хорошие"><span>Да, есть</span></label>
-          <label><input type="radio" name="photo_person" value="Нет, нужно сделать"><span>Нет</span></label>
+          <label><input type="radio" name="photo_person" value="Да"><span>Да, есть хорошие</span></label>
+          <label><input type="radio" name="photo_person" value="Нет"><span>Нет, нужно сделать</span></label>
         </div>
       </div>
 
       <div class="q">
-        <label>Есть ли фото кабинета?</label>
+        <label>Есть ли фото твоего кабинета?</label>
         <div class="options-grid">
-          <label><input type="radio" name="photo_office" value="Да, есть"><span>Да, есть</span></label>
+          <label><input type="radio" name="photo_office" value="Да"><span>Да, есть</span></label>
           <label><input type="radio" name="photo_office" value="Нет"><span>Нет</span></label>
         </div>
       </div>
 
       <div class="q">
-        <label>Есть ли отзывы?</label>
-        <div class="options-grid">
-          <label><input type="radio" name="reviews" value="Да, на Яндекс.Картах"><span>На Яндекс.Картах</span></label>
-          <label><input type="radio" name="reviews" value="Есть скриншоты"><span>Скриншоты</span></label>
-          <label><input type="radio" name="reviews" value="Нет"><span>Нет</span></label>
-        </div>
+        <label for="f10">Есть ли отзывы от учеников?</label>
+        <span class="hint">Скопируй пару отзывов сюда или скинь мне скриншоты в мессенджер.</span>
+        <textarea id="f10"></textarea>
       </div>
 
       <div class="q">
-        <label>Есть ли логотип или фирменные цвета?</label>
-        <input type="text" id="f16" placeholder="Например: синий и белый / логотип есть">
-      </div>
-    </div>
-
-    <!-- 6. Дизайн и примеры -->
-    <div class="card">
-      <div class="card-title"><span>6</span> Дизайн и примеры</div>
-      <div class="card-sub">Помоги мне понять твой вкус.</div>
-      
-      <div class="q">
-        <label>Какой стиль тебе ближе?</label>
-        <div class="options-grid">
-          <label><input type="radio" name="style" value="Строгий и деловой"><span>Строгий и деловой</span></label>
-          <label><input type="radio" name="style" value="Уютный и домашний"><span>Уютный и домашний</span></label>
-          <label><input type="radio" name="style" value="Современный и яркий"><span>Современный и яркий</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <label for="f17">Ссылки на 2-3 сайта, которые тебе нравятся</label>
-        <span class="hint">Это могут быть сайты любых брендов, блогов или репетиторов. Важен внешний вид.</span>
-        <textarea id="f17" placeholder="https://site1.ru&#10;https://site2.ru&#10;https://site3.ru"></textarea>
-      </div>
-    </div>
-
-    <!-- 7. Главная кнопка -->
-    <div class="card">
-      <div class="card-title"><span>7</span> Главное действие</div>
-      <div class="card-sub">Что должен сделать посетитель на сайте?</div>
-      
-      <div class="q">
-        <label>Какая кнопка должна быть на главной?</label>
-        <div class="options-grid">
-          <label><input type="radio" name="main_cta" value="Записаться на урок"><span>Записаться на урок</span></label>
-          <label><input type="radio" name="main_cta" value="Заказать перевод"><span>Заказать перевод</span></label>
-          <label><input type="radio" name="main_cta" value="Написать в WhatsApp"><span>Написать в WhatsApp</span></label>
-          <label><input type="radio" name="main_cta" value="Позвонить"><span>Позвонить</span></label>
-        </div>
+        <label for="f11">Какие сайты тебе нравятся визуально?</label>
+        <span class="hint">Скинь 2-3 ссылки на любые красивые сайты, чтобы я понял, какой дизайн тебе сделать.</span>
+        <textarea id="f11" placeholder="https://...&#10;https://..."></textarea>
       </div>
     </div>
 
@@ -377,27 +274,25 @@
   <div class="actions">
     <div id="msg" class="msg" role="status"></div>
     <button type="button" class="btn btn-primary" id="btn-email" onclick="sendEmail()">Отправить анкету</button>
-    <button type="button" class="btn btn-outline" onclick="saveAndClose()">Сохранить и закрыть</button>
+    <button type="button" class="btn btn-outline" onclick="saveAndClose()">Сохранить</button>
     <div class="actions-quiet">
       <button type="button" class="btn-link" onclick="copyAnswers()">Скопировать текст</button>
       <button type="button" class="btn-link" onclick="downloadFile()">Скачать файл</button>
       <button type="button" class="btn-link" onclick="clearDraft()">Очистить</button>
     </div>
   </div>
-
-  <div class="footer-note">Черновик сохраняется в этом браузере. При отправке данные уходят на почту разработчика.</div>
 </div>
 
 <script>
 (function () {
   "use strict";
-  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17"];
-  var KEY = "anketa_oksana_v1";
+  var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11"];
+  var KEY = "anketa_oksana_vizitka";
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
 
-  function saveDraft(silent) {
+  function saveDraft() {
     var data = {}, i, inputs;
     for (i = 0; i < FIELDS.length; i++) if ($(FIELDS[i])) data[FIELDS[i]] = $(FIELDS[i]).value;
     data._checks = [];
@@ -422,29 +317,27 @@
   }
 
   function clearDraft() {
-    if (!confirm("Очистить всю анкету? Данные будут удалены.")) return;
+    if (!confirm("Очистить всю анкету?")) return;
     try { localStorage.removeItem(KEY); } catch (e) {}
     location.reload();
   }
 
   function saveAndClose() {
-    saveDraft(true);
-    show("Сохранено! Можешь закрыть страницу, ответы не пропадут.", true);
+    saveDraft();
+    show("Сохранено! Можешь закрыть страницу.", true);
   }
 
   function updateProgress() {
     var filled = 0;
     function has(id) { return $(id) && $(id).value.trim().length > 0; }
-    if (has("f1") && has("f2") && has("f5")) filled++;
+    if (has("f1") && has("f2") && has("f4")) filled++;
+    if (has("f7") || has("f8")) filled++;
     if (document.querySelector("input[name=format]:checked")) filled++;
-    if (has("f10") || document.querySelector("input[name=trans_type]:checked")) filled++;
-    if (has("f13")) filled++;
-    if (document.querySelector("input[name=photo_person]:checked") || document.querySelector("input[name=reviews]:checked")) filled++;
-    if (document.querySelector("input[name=style]:checked") || has("f17")) filled++;
-    if (document.querySelector("input[name=main_cta]:checked")) filled++;
-    var pct = Math.round(filled / 7 * 100);
+    if (has("f9") || document.querySelector("input[name=trans_type]:checked")) filled++;
+    if (document.querySelector("input[name=photo_person]:checked") || has("f11")) filled++;
+    var pct = Math.round(filled / 5 * 100);
     $("pfill").style.width = pct + "%";
-    $("plabel").textContent = "Заполнено " + filled + " из 7";
+    $("plabel").textContent = "Заполнено " + filled + " из 5";
   }
 
   function markError(id, bad) {
@@ -459,7 +352,7 @@
 
   function validateForm() {
     var firstBad = null;
-    ["f1","f2","f5"].forEach(function(id) {
+    ["f1","f2","f4"].forEach(function(id) {
       var v = $(id).value.trim();
       markError(id, !v);
       if (!v && !firstBad) firstBad = id;
@@ -480,21 +373,30 @@
       return res.length ? res.join(", ") : "—";
     }
     return [
-      ["1. Имя на сайте", val("f1")], ["1. Адрес", val("f2")], ["1. Яндекс.Карты", val("f3")],
-      ["1. Как добраться", val("f4")], ["1. Телефон", val("f5")], ["1. Telegram", val("f6")], ["1. WhatsApp", val("f7")],
-      ["2. Ученики", group("students")], ["2. Формат", group("format")], ["2. Пробное", group("trial")],
-      ["2. Цена уроков", val("f8")], ["2. Скидки", val("f9")],
-      ["3. Языки", val("f10")], ["3. Типы переводов", group("trans_type")], ["3. Как принимаешь", group("trans_how")], ["3. Цена переводов", val("f11")],
-      ["4. Образование и стаж", val("f12")], ["4. Фишка", val("f13")], ["4. Отличия уроков", val("f14")], ["4. FAQ", val("f15")],
-      ["5. Фото человека", group("photo_person")], ["5. Фото кабинета", group("photo_office")], ["5. Отзывы", group("reviews")], ["5. Логотип/цвета", val("f16")],
-      ["6. Стиль", group("style")], ["6. Примеры сайтов", val("f17")],
-      ["7. Главная кнопка", group("main_cta")]
+      ["1. Подпись", val("f1")], 
+      ["1. Адрес", val("f2")], 
+      ["1. Яндекс.Карты", val("f3")],
+      ["1. Телефон", val("f4")], 
+      ["1. Telegram", val("f5")], 
+      ["1. WhatsApp", val("f6")],
+      ["2. Образование и опыт", val("f7")], 
+      ["2. Почему выбирают", val("f8")],
+      ["3. Ученики", group("students")], 
+      ["3. Формат", group("format")], 
+      ["3. Пробное", group("trial")],
+      ["4. Языки", val("f9")], 
+      ["4. Типы переводов", group("trans_type")], 
+      ["4. Как передают", group("trans_how")],
+      ["5. Фото человека", group("photo_person")], 
+      ["5. Фото кабинета", group("photo_office")], 
+      ["5. Отзывы", val("f10")], 
+      ["5. Примеры сайтов", val("f11")]
     ];
   }
 
   function collect() {
     var lines = collectPairs();
-    var out = "АНКЕТА ДЛЯ САЙТА (ОКСАНА)\n\n";
+    var out = "ИНФОРМАЦИЯ ДЛЯ САЙТА (ОКСАНА)\n\n";
     lines.forEach(function(l) { out += l[0] + ": " + l[1] + "\n"; });
     return out;
   }
@@ -503,7 +405,7 @@
     var pairs = collectPairs();
     var p = {
       access_key: WEB3FORMS_KEY,
-      subject: "Анкета для сайта — " + ($("f1").value.trim() || "Оксана"),
+      subject: "Сайт для Оксаны — " + ($("f1").value.trim() || "Без имени"),
       from_name: "Анкета Оксаны"
     };
     pairs.forEach(function(pair) { p[pair[0]] = pair[1]; });
@@ -533,22 +435,22 @@
       btn.textContent = old;
       btn.disabled = false;
       if (data && data.success) {
-        show("Анкета отправлена! Спасибо, Оксана.", true);
+        show("Всё отправилось! Спасибо, Оксана.", true);
       } else {
-        show("Ошибка отправки. Попробуй скачать файл.", false);
+        show("Ошибка. Попробуй скачать файл.", false);
       }
     })
     .catch(function () {
       btn.textContent = old;
       btn.disabled = false;
-      show("Нет связи с интернетом. Попробуй скачать файл.", false);
+      show("Нет интернета. Попробуй скачать файл.", false);
     });
   }
 
   function copyAnswers() {
     if (!validateForm()) { show("Заполни обязательные поля.", false); return; }
     navigator.clipboard.writeText(collect()).then(function() {
-      show("Текст скопирован! Вставь его в чат.", true);
+      show("Текст скопирован!", true);
     });
   }
 
@@ -557,7 +459,7 @@
     var blob = new Blob([collect()], { type: "text/plain;charset=utf-8" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "anketa_oksana.txt";
+    a.download = "info_oksana.txt";
     a.click();
     show("Файл скачан.", true);
   }
