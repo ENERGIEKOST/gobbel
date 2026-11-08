@@ -138,6 +138,16 @@
   }
   .btn-alt:hover:not(:disabled) { border-color: var(--ink); background: var(--paper); }
 
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    font-weight: 500;
+    min-height: 44px;
+    font-size: 15px;
+  }
+  .btn-outline:hover:not(:disabled) { border-color: var(--muted); }
+
   .btn.is-loading { color: transparent !important; pointer-events: none; }
   .btn.is-loading::after {
     content: "";
@@ -150,7 +160,7 @@
     border-top-color: #fff;
     animation: btn-spin .7s linear infinite;
   }
-  .btn-alt.is-loading::after {
+  .btn-alt.is-loading::after, .btn-outline.is-loading::after {
     border-color: rgba(36, 48, 62, 0.25);
     border-top-color: var(--ink);
   }
@@ -205,7 +215,16 @@
   #msg.bad { color: var(--err); background: rgba(192, 57, 43, 0.06); border: 1px solid rgba(192, 57, 43, 0.2); }
   #msg.visible { display: block; }
 
-  footer { text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); padding: 24px 0 20px; max-width: 480px; margin: 0 auto; }
+  .hp {
+    position: absolute !important;
+    left: -9999px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+  }
+
+  footer { text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); padding: 24px 0 20px; max-width: 520px; margin: 0 auto; line-height: 1.6; }
 
   @media (max-width: 520px) {
     .top h1 { font-size: 25px; } .top { padding-top: 30px; }
@@ -225,13 +244,15 @@
     <h1>Ответы для вашего сайта</h1>
     <p>Заполните анкету — это займёт около 15 минут. Ответы сохраняются автоматически: можно закрыть страницу и продолжить позже. По завершении нажмите кнопку внизу.</p>
     <div class="progress">
-      <div class="bar" id="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Прогресс заполнения анкеты"><div class="fill" id="pfill"></div></div>
-      <div class="label" id="plabel">Заполнено 0%</div>
-      <div class="saved-note" id="savednote" aria-live="polite"></div>
+      <div class="bar" id="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0" aria-label="Прогресс заполнения анкеты"><div class="fill" id="pfill"></div></div>
+      <div class="label" id="plabel">Заполнено 0 из 9 разделов</div>
+      <div class="saved-note" id="savednote">Автосохранение включено</div>
     </div>
   </div>
 
   <form id="anketa" novalidate>
+    <!-- Ловушка для ботов: человек её не видит и не заполняет -->
+    <input type="text" class="hp" id="honeypot" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
 
   <div class="card">
     <h2>1. Основные сведения</h2>
@@ -362,6 +383,7 @@
 
   <div class="actions">
     <button type="button" class="btn btn-main" id="btn-email" onclick="sendEmail()">Отправить на почту</button>
+    <button type="button" class="btn btn-outline" onclick="saveAndClose()">Сохранить и закрыть</button>
 
     <div class="actions-alt">
       <button type="button" class="btn btn-alt" id="btn-wa" onclick="sendWA()">Отправить в WhatsApp</button>
@@ -383,14 +405,14 @@
     <div id="msg" role="status" aria-live="polite"></div>
   </div>
 
-  <footer>Черновик хранится в этом браузере и не передаётся никуда, пока вы не нажмёте «Отправить».</footer>
+  <footer>Черновик хранится в этом браузере. При отправке данные уходят через сервис Web3Forms на почту получателя.</footer>
 </div>
 
 <script>
 (function () {
   "use strict";
   var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20","f21","f22","f23","f24","f25","f26","phone"];
-  var KEY = "anketa_draft_v5";
+  var KEY = "anketa_draft_v6";
   var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
@@ -400,16 +422,25 @@
   }
 
   /* ---------- черновик ---------- */
-  var savedShowTimer = null, savedHideTimer = null;
-  function saveDraft() {
+  var savedShowTimer = null;
+  function saveDraft(silent) {
     var data = {}, i, boxes;
     for (i = 0; i < FIELDS.length; i++) data[FIELDS[i]] = $(FIELDS[i]).value;
     boxes = document.querySelectorAll("input[type=checkbox], input[type=radio]");
     data._checks = [];
     for (i = 0; i < boxes.length; i++) if (boxes[i].checked) data._checks.push(boxKey(boxes[i]));
     try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
-    scheduleSavedNote();
     updateProgress();
+    if (silent) return;
+    var n = $("savednote");
+    if (!n) return;
+    n.textContent = "Сохранено только что";
+    n.style.color = "var(--ok)";
+    clearTimeout(savedShowTimer);
+    savedShowTimer = setTimeout(function () {
+      n.textContent = "Автосохранение включено";
+      n.style.color = "var(--ok)";
+    }, 1800);
   }
   function loadDraft() {
     var data, i, boxes, set = {};
@@ -426,19 +457,14 @@
     syncPills();
   }
   function clearDraft() {
-    if (!confirm("Удалить все ответы? Действие нельзя отменить.")) return;
+    if (!confirm("Все ответы будут удалены без возможности восстановления. Продолжить?")) return;
     try { localStorage.removeItem(KEY); } catch (e) {}
     location.reload();
   }
-  function scheduleSavedNote() {
-    clearTimeout(savedShowTimer);
-    savedShowTimer = setTimeout(function () {
-      var n = $("savednote");
-      if (!n) return;
-      n.textContent = "Черновик сохранён";
-      clearTimeout(savedHideTimer);
-      savedHideTimer = setTimeout(function () { n.textContent = ""; }, 2000);
-    }, 400);
+  function saveAndClose() {
+    saveDraft(true);
+    show("Сохранено. Можете закрыть страницу — ответы останутся в этом браузере. Вернётесь — продолжите с того же места.", true, 8000);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }
 
   function syncPills() {
@@ -449,22 +475,30 @@
     }
   }
 
-  /* ---------- прогресс ---------- */
+  /* ---------- прогресс: раздел считается заполненным, если в нём есть хотя бы одно значимое поле ---------- */
+  function sectionFilled(num) {
+    function has(id) { return $(id) && $(id).value.trim().length > 0; }
+    switch (num) {
+      case 1: return has("f1") || has("f2") || has("f3") || has("f4") || has("f5");
+      case 2: return has("f6") || has("f7") || has("f8") || has("f9");
+      case 3: return !!document.querySelector(".svc:checked") || has("f10") || !!document.querySelector("input[name=trial]:checked");
+      case 4: return has("f11") || has("f12") || has("f13") || !!document.querySelector("input[name=format]:checked");
+      case 5: return has("f14") || has("f15") || has("f16") || has("f17") || has("f18");
+      case 6: return has("f19") || has("f20") || has("f21") || has("f22") || has("f23");
+      case 7: return !!document.querySelector(".photos:checked");
+      case 8: return !!document.querySelector("input[name=style]:checked") || has("f24") || has("f25");
+      case 9: return has("f26");
+    }
+    return false;
+  }
   function updateProgress() {
-    var filled = 0, i;
-    var meaningful = ["f1","f2","f3","f4","f5","f6","f7","f9","f11","f13","f14","f15","f19","f20","f23","f24","f25","f26"];
-    for (i = 0; i < meaningful.length; i++) { if ($(meaningful[i]).value.trim()) filled++; }
-    if (document.querySelector(".svc:checked")) filled++;
-    if (document.querySelector("input[name=trial]:checked")) filled++;
-    if (document.querySelector("input[name=format]:checked")) filled++;
-    if (document.querySelector(".photos:checked")) filled++;
-    if (document.querySelector("input[name=style]:checked")) filled++;
-    var total = meaningful.length + 5;
-    var pct = Math.min(100, Math.round(filled / total * 100));
+    var filled = 0;
+    for (var i = 1; i <= 9; i++) if (sectionFilled(i)) filled++;
+    var pct = Math.round(filled / 9 * 100);
     $("pfill").style.width = pct + "%";
-    $("plabel").textContent = "Заполнено " + pct + "%";
+    $("plabel").textContent = "Заполнено " + filled + " из 9 разделов";
     var pb = $("pbar");
-    if (pb) pb.setAttribute("aria-valuenow", String(pct));
+    if (pb) pb.setAttribute("aria-valuenow", String(filled));
   }
 
   /* ---------- валидация ---------- */
@@ -569,8 +603,7 @@
     var p = {
       access_key: WEB3FORMS_KEY,
       subject: "Анкета для сайта — " + ($("f1").value.trim() || "без названия"),
-      from_name: "Анкета для сайта",
-      botcheck: ""
+      from_name: "Анкета для сайта"
     };
     for (var i = 0; i < pairs.length; i++) p[pairs[i][0]] = pairs[i][1];
     return p;
@@ -591,9 +624,10 @@
     else btn.classList.remove("is-loading");
   }
 
-  /* ---------- отправка на почту через Web3Forms ---------- */
+  /* ---------- отправка на почту ---------- */
   function sendEmail() {
     if (!validateForm(true)) { show("Проверьте подсвеченные поля.", false); return; }
+    if ($("honeypot").value) { show("Отправка отменена.", false); return; }
     var btn = $("btn-email");
     setLoading(btn, true);
 
@@ -606,7 +640,7 @@
     .then(function (data) {
       setLoading(btn, false);
       if (data && data.success) {
-        show("Анкета отправлена на почту.", true, 8000);
+        show("Анкета отправлена на почту. Если письмо не пришло в течение 5 минут — проверьте папку «Спам». Если и там нет, воспользуйтесь кнопкой «Скачать файлом» и пришлите вручную.", true, 14000);
       } else {
         console.error("Web3Forms response:", data);
         show("Не удалось отправить. Повторите попытку или воспользуйтесь кнопкой «Скопировать ответы».", false);
@@ -664,6 +698,7 @@
   /* ---------- события ---------- */
   var els = document.querySelectorAll("input, textarea");
   for (var i = 0; i < els.length; i++) {
+    if (els[i].id === "honeypot") continue;
     if (els[i].type === "checkbox" || els[i].type === "radio") {
       els[i].addEventListener("change", function () { syncPills(); saveDraft(); });
     } else {
@@ -682,6 +717,7 @@
   window.copyAnswers = copyAnswers;
   window.downloadFile = downloadFile;
   window.clearDraft = clearDraft;
+  window.saveAndClose = saveAndClose;
 
   loadDraft();
   updateProgress();
