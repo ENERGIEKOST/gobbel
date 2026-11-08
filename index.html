@@ -66,7 +66,6 @@
   .checks label.on { border-color: var(--accent); background: #f9ece4; }
   .checks input { accent-color: var(--accent); }
 
-  /* ==== Блок действий и кнопки ==== */
   .actions {
     display: flex;
     flex-direction: column;
@@ -139,7 +138,6 @@
   }
   .btn-alt:hover:not(:disabled) { border-color: var(--ink); background: var(--paper); }
 
-  /* Загрузка: спиннер поверх текста */
   .btn.is-loading { color: transparent !important; pointer-events: none; }
   .btn.is-loading::after {
     content: "";
@@ -158,7 +156,6 @@
   }
   @keyframes btn-spin { to { transform: rotate(360deg); } }
 
-  /* «Тихие» действия — ссылки в одну строку */
   .actions-quiet {
     display: flex;
     flex-wrap: wrap;
@@ -394,7 +391,7 @@
   "use strict";
   var FIELDS = ["f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12","f13","f14","f15","f16","f17","f18","f19","f20","f21","f22","f23","f24","f25","f26","phone"];
   var KEY = "anketa_draft_v5";
-  var EMAIL_TO = "byshkin.konstantin@mail.ru";
+  var WEB3FORMS_KEY = "9a9d2fd8-ef21-4b92-ad0c-f9fb04b3ac77";
 
   function $(id) { return document.getElementById(id); }
 
@@ -570,14 +567,12 @@
   function buildPayload() {
     var pairs = collectPairs();
     var p = {
-      _subject: "Анкета для сайта — " + ($("f1").value.trim() || "без названия"),
-      _template: "table",
-      _captcha: "false",
-      _url: window.location.href
+      access_key: WEB3FORMS_KEY,
+      subject: "Анкета для сайта — " + ($("f1").value.trim() || "без названия"),
+      from_name: "Анкета для сайта",
+      botcheck: ""
     };
     for (var i = 0; i < pairs.length; i++) p[pairs[i][0]] = pairs[i][1];
-    var em = $("f21").value.trim();
-    if (em && isEmailOk(em)) p._replyto = em;
     return p;
   }
 
@@ -596,13 +591,13 @@
     else btn.classList.remove("is-loading");
   }
 
-  /* ---------- отправка на почту ---------- */
+  /* ---------- отправка на почту через Web3Forms ---------- */
   function sendEmail() {
     if (!validateForm(true)) { show("Проверьте подсвеченные поля.", false); return; }
     var btn = $("btn-email");
     setLoading(btn, true);
 
-    fetch("https://formsubmit.co/ajax/" + EMAIL_TO, {
+    fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(buildPayload())
@@ -610,17 +605,16 @@
     .then(function (r) { return r.json(); })
     .then(function (data) {
       setLoading(btn, false);
-      var ok = data && (data.success === true || data.success === "true");
-      if (ok) {
-        show("Анкета отправлена. При первой отправке сервис направит на указанный адрес письмо для подтверждения — перейдите по ссылке в нём. Последующие отправки будут приходить сразу.", true, 12000);
+      if (data && data.success) {
+        show("Анкета отправлена на почту.", true, 8000);
       } else {
-        console.error("FormSubmit response:", data);
+        console.error("Web3Forms response:", data);
         show("Не удалось отправить. Повторите попытку или воспользуйтесь кнопкой «Скопировать ответы».", false);
       }
     })
     .catch(function (err) {
       setLoading(btn, false);
-      console.error("FormSubmit error:", err);
+      console.error("Web3Forms error:", err);
       show("Нет связи с сервисом отправки. Проверьте интернет или воспользуйтесь кнопкой «Скопировать ответы».", false);
     });
   }
