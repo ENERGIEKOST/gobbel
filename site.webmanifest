@@ -1,0 +1,32 @@
+{
+  "name": "Языковой центр — английский и переводы документов, Батайск",
+  "short_name": "Языковой центр",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1C262E",
+  "theme_color": "#1C262E",
+  "icons": [
+    {
+      "src": "img/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/maskable-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/icons/maskable-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
